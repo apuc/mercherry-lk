@@ -465,6 +465,14 @@ selectric-items, .container .swiper-container .swiper-slide, .container .gallery
     line-height: 1.5;
     border-radius: 0.3rem;
 }
+.btn-outline-dark {
+    color: #343a40;
+    border-color: #343a40;
+}
+.btn-group .btn {
+    padding: 0.5rem 0.7rem;
+    min-width: unset;
+}
 [class*="rounded"] {
     border-radius: 10rem !important;
 }
