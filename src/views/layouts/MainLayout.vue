@@ -1,0 +1,26 @@
+<template>
+  <div class="main-layout layout">
+    <Header :headerClass="'admin-header'"/>
+    <main class="main">
+      <div class="admin-wrap">
+        <AdminMenu/>
+        <slot/>
+      </div>
+    </main>
+  </div>
+</template>
+
+<script>
+  import Header from "../../components/Header";
+  import AdminMenu from "../../components/admin/AdminMenu";
+  export default {
+    name: "MainLayout",
+    components: {AdminMenu, Header}
+  }
+</script>
+
+<style scoped>
+  .admin-wrap {
+    display: flex;
+  }
+</style>

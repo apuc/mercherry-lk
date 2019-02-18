@@ -1,25 +1,46 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import AdminProjects from "./views/admin/AdminProjects";
+import AdminVacancies from "./views/admin/AdminVacancies";
+import AdminResume from "./views/admin/AdminResume";
+import Login from "./views/Login";
+import Password from "./views/Password";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  },
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'admin',
+      component: AdminProjects
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
+      path: '/admin/vacancies',
+      name: 'adminVacancies',
+      component: AdminVacancies
+    },
+    {
+      path: '/admin/resume',
+      name: 'adminResume',
+      component: AdminResume
+    },
+    {
+      path: '/login',
+      name: 'login',
+      meta: {layout: 'auth'},
+      component: Login
+    },
+    {
+      path: '/password-reset',
+      name: 'password-reset',
+      meta: {layout: 'auth'},
+      component: Password
+    },
   ]
 })
