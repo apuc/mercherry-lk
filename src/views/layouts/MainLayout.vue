@@ -26,7 +26,8 @@
   .admin-content {
     flex-grow: 1;
     max-width: 100%;
-    padding: 15px;
+    padding: 1.75rem 1.75rem;
+    background-color: #f5f5f5;
   }
   .table {
     margin-bottom: 0;
@@ -85,7 +86,7 @@
       width: 60px;
     }
     &-btn-group {
-      width: 135px;
+      width: 160px;
     }
   }
 

@@ -24,7 +24,7 @@
   @import '../public/libs/font-awesome-4.7.0/css/font-awesome.css';
 
   html {
-    font-family: sans-serif;
+    font-family: "Rubik", sans-serif;
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
@@ -63,13 +63,12 @@
     max-width: 100%;
   }
 
-  body [class*="container"] .row:not(:last-child) {
-    margin-bottom: 3.125rem;
+  p {
+    font-size: 0.875rem;
   }
 
-  p {
-    line-height: 1.75em;
-    color: #646464;
+  body [class*="container"] .row:not(:last-child) {
+    margin-bottom: 3.125rem;
   }
 
   a:hover {

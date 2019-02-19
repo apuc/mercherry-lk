@@ -1,5 +1,8 @@
 <template>
   <div class="admin-menu-wrap" :class="menuOpen ? 'admin-menu--open' : ''">
+    <router-link class="navbar-brand" to="/">
+      Mercherry
+    </router-link>
     <button class="admin-menu__btn" @click="menuOpen = !menuOpen">
       <i class="fa" :class="menuOpen ? 'fa-angle-left' : 'fa-angle-right'"></i>
     </button>
@@ -41,16 +44,28 @@
 </script>
 
 <style lang="scss">
+  .navbar-brand {
+    margin: 15px auto;
+    color: #000;
+    &:hover {
+      color: #000;
+    }
+  }
   .admin-menu {
     display: flex;
     flex-direction: column;
     &-wrap {
       z-index: 101;
+      display: flex;
+      flex-direction: column;
       min-width: 255px;
       max-width: 255px;
-      min-height: calc(100vh - 80px);
+      min-height: 100vh;
+      margin-top: -75px;
       background-color: #fff;
       transition: all 0.3s ease;
+      -webkit-box-shadow: 0 0 28px 0 rgba(82, 63, 105, 0.08);
+      box-shadow: 0 0 28px 0 rgba(82, 63, 105, 0.08);
       @media (max-width: 991px) {
         position: fixed;
         top: 80px;

@@ -2,9 +2,6 @@
   <header class="header" :class="headerClass === undefined ? 'header-sticky bg-white header-light' : headerClass">
     <div class="container">
       <nav class="navbar navbar-expand-xl" :class="color === undefined ? 'navbar-light' : `navbar-${color}`">
-        <router-link class="navbar-brand" to="/">
-          Mercherry
-        </router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="burger">
             <span></span>
@@ -63,9 +60,13 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    display: flex;
+    align-items: center;
     width: 100%;
+    min-height: 75px;
     z-index: 100;
     border-bottom: 1px solid transparent;
+    box-shadow: 0px 0px 40px 0px rgba(82, 63, 105, 0.1);
     @media (max-width: 1199.98px) {
       border-radius: 0.25rem;
       margin: 15px;
