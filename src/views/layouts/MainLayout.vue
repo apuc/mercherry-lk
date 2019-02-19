@@ -24,10 +24,23 @@
     display: flex;
   }
   .admin-content {
+    flex-grow: 1;
+    max-width: 100%;
     padding: 15px;
   }
   .table {
     margin-bottom: 0;
+    border-color: #f3f3f3;
+    @media (max-width: 767px) {
+      min-width: 800px;
+    }
+    &-wrap {
+      width: 100%;
+      @media (max-width: 767px) {
+        overflow-x: scroll;
+        overflow-y: hidden;
+      }
+    }
     thead {
       th {
         border-top: 0;
@@ -41,9 +54,10 @@
     }
     th,
     td {
-      padding: 0.9375rem;
+      padding: 0.8375rem;
       vertical-align: middle;
       line-height: 1;
+      border-color: inherit !important;
     }
     td {
       font-size: 0.875rem;
@@ -63,6 +77,15 @@
       th {
         border: none;
       }
+    }
+  }
+
+  .table {
+    &-id {
+      width: 60px;
+    }
+    &-btn-group {
+      width: 135px;
     }
   }
 

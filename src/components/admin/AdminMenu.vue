@@ -48,6 +48,7 @@
       z-index: 101;
       min-width: 255px;
       max-width: 255px;
+      min-height: calc(100vh - 80px);
       background-color: #fff;
       transition: all 0.3s ease;
       @media (max-width: 991px) {
@@ -80,6 +81,7 @@
       }
     }
     &__item {
+      position: relative;
       display: flex;
       align-items: center;
       padding: 0.75rem 1.25rem 0.75rem 1.25rem;
@@ -92,6 +94,15 @@
       .fa {
         margin-left: auto;
         color: #404852;
+      }
+      &.router-link-exact-active:before {
+        content: "";
+        position: absolute;
+        width: 5px;
+        height: 100%;
+        background: #5f6be3;
+        left: 0;
+        top: 0;
       }
     }
   }

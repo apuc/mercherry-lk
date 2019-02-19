@@ -18,6 +18,11 @@ export default new Router({
     {
       path: '/',
       name: 'admin',
+      redirect: 'admin/projects',
+    },
+    {
+      path: '/admin/projects',
+      name: 'adminProjects',
       component: AdminProjects
     },
     {

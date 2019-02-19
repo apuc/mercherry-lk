@@ -470,8 +470,9 @@ selectric-items, .container .swiper-container .swiper-slide, .container .gallery
     border-color: #343a40;
 }
 .btn-group .btn {
-    padding: 0.5rem 0.7rem;
+    padding: 0.3rem 0.7rem;
     min-width: unset;
+    font-size: 14px;
 }
 [class*="rounded"] {
     border-radius: 10rem !important;
