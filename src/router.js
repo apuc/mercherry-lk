@@ -18,20 +18,20 @@ export default new Router({
     {
       path: '/',
       name: 'admin',
-      redirect: 'admin/projects',
+      redirect: '/projects',
     },
     {
-      path: '/admin/projects',
+      path: '/projects',
       name: 'adminProjects',
       component: AdminProjects
     },
     {
-      path: '/admin/vacancies',
+      path: '/vacancies',
       name: 'adminVacancies',
       component: AdminVacancies
     },
     {
-      path: '/admin/resume',
+      path: '/resume',
       name: 'adminResume',
       component: AdminResume
     },

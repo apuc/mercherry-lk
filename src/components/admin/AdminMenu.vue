@@ -5,7 +5,7 @@
     </button>
     <nav class="admin-menu">
       <router-link v-for="item in links"
-                   :to="`/admin/${item.href}`"
+                   :to="`/${item.href}`"
                    :key="item.href"
                    class="admin-menu__item"
       >
