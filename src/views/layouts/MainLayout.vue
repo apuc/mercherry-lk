@@ -28,16 +28,18 @@
     max-width: 100%;
     padding: 1.75rem 1.75rem;
     background-color: #f5f5f5;
+    @media (max-width: 575px) {
+      padding: 1rem;
+    }
   }
   .table {
     margin-bottom: 0;
-    border-color: #f3f3f3;
-    @media (max-width: 767px) {
+    @media (max-width: 991px) {
       min-width: 800px;
     }
     &-wrap {
       width: 100%;
-      @media (max-width: 767px) {
+      @media (max-width: 991px) {
         overflow-x: scroll;
         overflow-y: hidden;
       }
@@ -55,10 +57,10 @@
     }
     th,
     td {
-      padding: 0.8375rem;
+      padding: 0.8375rem 0.6rem;
       vertical-align: middle;
       line-height: 1;
-      border-color: inherit !important;
+      border-color: #f3f3f3 !important;
     }
     td {
       font-size: 0.875rem;

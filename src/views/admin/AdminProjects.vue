@@ -3,22 +3,28 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Проекты</h4>
-        <button class="btn btn-sm btn-primary mb-2">Добавить проекты</button>
+        <router-link to="/add-project" class="btn btn-sm btn-primary mb-2">
+          <i class="fa fa-circle-o mr-1">
+            <i class="fa fa-plus"></i>
+          </i>
+          <span>Добавить проекты</span>
+        </router-link>
         <div class="table-wrap">
           <table class="table">
             <thead>
             <tr>
               <th class="table-id">ID</th>
               <th>Название</th>
-              <th class="table-btn-group"></th>
+              <th class="table-buttons"></th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="item in data">
-              <td>{{item.id}}</td>
-              <td>{{item.name}}</td>
+              <td v-for="label in item">
+                {{label}}
+              </td>
               <td>
-                <div class="btn-icons">
+                <div class="btn-icons justify-content-end">
                   <button class="btn-ico">
                     <i class="fa fa-eye"></i>
                   </button>
@@ -73,23 +79,41 @@
 </script>
 
 <style lang="scss">
+  .table-buttons {
+    width: 115px;
+  }
+  .fa-circle-o {
+    position: relative;
+    font-size: 20px;
+    .fa {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      font-size: 11px;
+      transform: translate(-50%, -50%);
+    }
+  }
+
   .btn {
     &-icons {
       display: flex;
     }
     &-ico {
-      min-height: 45px;
-      max-height: 45px;
-      min-width: 45px;
-      max-width: 45px;
-      color: #99a7df;
-      font-size: 1rem;
-      border-radius: 50%;
+      min-width: 29px;
+      max-width: 29px;
+      min-height: 29px;
+      max-height: 29px;
+      font-size: 14px;
+      color: #93a2dd;
+      font-weight: 600;
+      text-transform: uppercase;
       background-color: transparent;
       border: none;
+      border-radius: 50%;
       transition: all 0.3s;
       &:hover {
-        background-color: #dde1f7;
+        color: #5d78ff;
+        background: #f0f3ff;
       }
     }
   }
@@ -98,6 +122,9 @@
     border: none;
     &-body {
       padding: 1.88rem 1.81rem;
+      @media (max-width: 575px) {
+        padding: 1rem;
+      }
     }
     .card-title {
       color: #737373;

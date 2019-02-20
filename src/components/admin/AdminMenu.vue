@@ -54,6 +54,7 @@
   .admin-menu {
     display: flex;
     flex-direction: column;
+    margin-left: 5px;
     &-wrap {
       z-index: 101;
       display: flex;
@@ -66,9 +67,10 @@
       transition: all 0.3s ease;
       -webkit-box-shadow: 0 0 28px 0 rgba(82, 63, 105, 0.08);
       box-shadow: 0 0 28px 0 rgba(82, 63, 105, 0.08);
-      @media (max-width: 991px) {
+      @media (max-width: 1199px) {
         position: fixed;
-        top: 80px;
+        top: 0;
+        margin-top: 0;
         left: -255px;
       }
     }
@@ -77,7 +79,7 @@
     }
     &__btn {
       position: fixed;
-      top: 30px;
+      top: 15px;
       right: 70px;
       display: flex;
       align-items: center;
@@ -91,7 +93,7 @@
       border: none;
       border-radius: 50%;
       transition: all 0.3s ease;
-      @media (min-width: 992px) {
+      @media (min-width: 1200px) {
         display: none;
       }
     }

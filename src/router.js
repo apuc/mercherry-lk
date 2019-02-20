@@ -5,6 +5,7 @@ import AdminVacancies from "./views/admin/AdminVacancies";
 import AdminResume from "./views/admin/AdminResume";
 import Login from "./views/Login";
 import Password from "./views/Password";
+import AddProject from "./views/admin/AddProject";
 
 Vue.use(Router);
 
@@ -47,5 +48,10 @@ export default new Router({
       meta: {layout: 'auth'},
       component: Password
     },
+    {
+      path: '/add-project',
+      name: 'add-project',
+      component: AddProject
+    }
   ]
 })
