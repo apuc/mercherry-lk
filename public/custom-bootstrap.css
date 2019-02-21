@@ -213,7 +213,8 @@ selectric-items, .container .swiper-container .swiper-slide, .container .gallery
     background-color: transparent;
     border: 1px solid #e5e5e5;
 }
-.btn {
+.btn,
+.ajax-upload-dragdrop .ajax-file-upload {
     display: inline-flex;
     align-items: center;
     font-weight: 400;
@@ -230,7 +231,7 @@ selectric-items, .container .swiper-container .swiper-slide, .container .gallery
 }
 
 @media (max-width: 575px) {
-    .btn {
+    .btn, .ajax-upload-dragdrop .ajax-file-upload {
         padding: 0.875rem 1rem;
     }
 }
@@ -943,7 +944,7 @@ fieldset:disabled a {
     margin-bottom: .5rem;
 }
 .form-control {
-    border: 1px solid #f3f3f3;
+    border: 1px solid #d4d7da;
     height: 45px;
     font-weight: 400;
     font-size: 0.8125rem;

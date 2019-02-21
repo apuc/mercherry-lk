@@ -16,22 +16,16 @@
             <textarea class="form-control" id="description" rows="4"></textarea>
           </div>
           <div class="form-group">
-            <label>
-              <span class="d-inline-block mr-2">Изображение</span>
-              <input type="file">
-            </label>
+            <label class="d-inline-block mr-2">Изображение</label>
+            <div class="fileuploader">Upload</div>
           </div>
           <div class="form-group">
-            <label>
-              <span class="d-inline-block mr-2">Видео</span>
-              <input type="file">
-            </label>
+            <label class="d-inline-block mr-2">Видео</label>
+            <div class="fileuploader">Upload</div>
           </div>
           <div class="form-group">
-            <label>
-              <span class="d-inline-block mr-2">Презентация</span>
-              <input type="file">
-            </label>
+            <label class="d-inline-block mr-2">Презентация</label>
+            <div class="fileuploader">Upload</div>
           </div>
           <div class="form-group">
             <label for="link">Сслыка на сайт</label>
@@ -46,10 +40,43 @@
 
 <script>
   export default {
-    name: "AddProject"
+    name: "AddProject",
+    created() {
+      $(document).ready(function() {
+        if ($(".fileuploader").length) {
+          $(".fileuploader").each(function(index, value) {
+            $(value).uploadFile({
+              url: "YOUR_FILE_UPLOAD_URL",
+              fileName: "myfile"
+            });
+          });
+        }
+      });
+    }
   }
 </script>
 
-<style scoped>
-
+<style>
+  .ajax-upload-dragdrop {
+    border-color: #f3f3f3;
+    border-style: dotted;
+    max-width: 100%;
+  }
+  .ajax-upload-dragdrop .ajax-file-upload {
+    background: #4d7cff;
+    box-shadow: none;
+    height: auto;
+  }
+  .ajax-upload-dragdrop span b {
+    font-size: .8125rem;
+    color: #222222;
+    font-weight: initial;
+  }
+  .ajax-file-upload-statusbar {
+    margin: 0;
+  }
+  .ajax-file-upload-statusbar,
+  .ajax-file-upload-statusbar * {
+    max-width: 100%;
+  }
 </style>
