@@ -18,7 +18,8 @@ Vue.config.productionTip = false;
 
 Vue.use(VeeValidate, {
   validity: true,
-  locale: 'ru'
+  locale: 'ru',
+  events: 'change'
 });
 
 Validator.extend('verify_password', {

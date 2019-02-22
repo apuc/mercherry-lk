@@ -6,6 +6,7 @@ import AdminResume from "./views/admin/AdminResume";
 import Login from "./views/Login";
 import Password from "./views/Password";
 import AddProject from "./views/admin/AddProject";
+import AddVacancy from "./views/admin/AddVacancy";
 
 Vue.use(Router);
 
@@ -52,6 +53,11 @@ export default new Router({
       path: '/add-project',
       name: 'add-project',
       component: AddProject
+    },
+    {
+      path: '/add-vacancy',
+      name: 'add-vacancy',
+      component: AddVacancy
     }
   ]
 })
