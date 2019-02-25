@@ -1,14 +1,20 @@
 <template>
   <div>
     <div class="form-group">
-      <label>{{data.label}}</label>
+      <label v-if="data.label !== undefined" :for="data.id">{{data.label}}</label>
       <select class="form-control"
+              :id="data.id"
               :name="data.name"
+              @input="updateValue"
+              @change="updateValue"
+              @blur="$emit('blur')"
+              :value="value"
       >
         <option v-for="option in data.options">
           {{option}}
         </option>
       </select>
+      <p v-if="error !== undefined" class="text-danger">{{error}}</p>
     </div>
   </div>
 </template>
@@ -18,7 +24,10 @@
 
   export default {
     name: "InputSelect",
-    mixins: [inputMixin]
+    mixins: [inputMixin],
+    mounted() {
+      this.$emit('input', this.data.options[0])
+    }
   }
 </script>
 

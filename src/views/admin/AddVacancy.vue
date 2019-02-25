@@ -3,12 +3,17 @@
     <div class="card container p-0">
       <div class="card-body">
         <Breadcrumbs :items="breadcrumbs"/>
+        <h4 class="card-title">{{mainTitle}}</h4>
         <Tabs :dataTabs="dataTabs"
               @tabClick="onTabClick"
         />
         <component :is="`AddVacancy${dataTabs.currentTab}`"
                    class="mt-4"
-                   @inputUpdate="onInputUpdate"
+                   @onInput="onInputUpdate"
+                   @next="next()"
+                   @prev="prev()"
+                   :profile="dataTabs.tabs[3].disabled"
+                   :education="dataTabs.tabs[4].disabled"
         />
       </div>
     </div>
@@ -43,7 +48,7 @@
             href: 'vacancy'
           },
           {
-            name: 'Новая вакансия'
+            name: ''
           }
         ],
         dataTabs: {
@@ -53,24 +58,29 @@
             {
               name: 'First',
               label: 'Шаг 1',
+              done: false
             },
             {
               name: 'Second',
-              label: 'Шаг 2'
+              label: 'Шаг 2',
+              done: false
             },
             {
               name: 'Third',
-              label: 'Шаг 3'
+              label: 'Шаг 3',
+              done: false
             },
             {
               name: 'Fourth',
               label: 'Шаг 4 (Анкета)',
-              disabled: true
+              disabled: true,
+              done: false
             },
             {
               name: 'Fifth',
               label: 'Шаг 5 (Обучение)',
-              disabled: true
+              disabled: true,
+              done: false
             }
           ]
         },
@@ -83,7 +93,8 @@
             value: 1,
             item: 4
           }
-        }
+        },
+        mainTitle: ''
       }
     },
     computed: {
@@ -102,7 +113,57 @@
             this.dataTabs.tabs[item.item].disabled = true;
           }
         }
+      },
+      title() {
+        switch(this.dataTabs.currentTab) {
+          case 'First':
+            this.breadcrumbs[this.breadcrumbs.length - 1].name = 'Новая вакансия';
+            this.mainTitle = 'Новая вакансия';
+            break;
+          case 'Second':
+            this.breadcrumbs[this.breadcrumbs.length - 1].name = 'Редактирование';
+            this.mainTitle = 'Редактирование вакансии';
+            break;
+          case 'Third':
+            this.breadcrumbs[this.breadcrumbs.length - 1].name = 'Редактирование';
+            this.mainTitle = 'Редактирование вакансии';
+            break;
+          case 'Fourth':
+            this.breadcrumbs[this.breadcrumbs.length - 1].name = 'Редактирование';
+            this.mainTitle = 'Редактирование вакансии';
+            break;
+          case 'Fifth':
+            this.breadcrumbs[this.breadcrumbs.length - 1].name = 'Редактирование';
+            this.mainTitle = 'Редактирование вакансии';
+            break;
+        }
+      },
+      next() {
+        for (let i = 0; i < this.dataTabs.tabs.length; i++) {
+          if (this.dataTabs.tabs[i].name === this.dataTabs.currentTab) {
+            this.dataTabs.tabs[i].done = true;
+            this.dataTabs.currentTab = this.dataTabs.tabs[i + 1].name;
+            break;
+          }
+        }
+        window.scrollTo(0, 0);
+      },
+      prev() {
+        for (let i = 0; i < this.dataTabs.tabs.length; i++) {
+          if (this.dataTabs.tabs[i].name === this.dataTabs.currentTab) {
+            this.dataTabs.tabs[i].done = false;
+            this.dataTabs.currentTab = this.dataTabs.tabs[i - 1].name;
+            break;
+          }
+        }
+        window.scrollTo(0, 0);
       }
+    },
+    beforeUpdate() {
+      this.title();
+    },
+    created() {
+      this.title();
     },
     mixins: [tabsMixin]
   }

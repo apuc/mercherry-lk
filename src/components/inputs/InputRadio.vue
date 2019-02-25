@@ -2,20 +2,21 @@
   <div>
     <div class="form-group">
       <label class="d-block">{{data.label}}</label>
-      <div class="form-check" v-for="(item, index) in data.radio">
+      <div class="form-check" v-for="item in data.radio">
         <label class="form-check-label">
           <input type="radio"
                  class="form-check-input"
                  :value="item.value"
                  :name="data.name"
-                 @input="customInput"
-                 :ref="index === 0 ? 'input' : ''"
-                 v-validate="data.validate"
+                 @input="updateValue"
+                 @change="updateValue"
+                 @blur="$emit('blur')"
           >
           <i class="input-helper"></i>
           <span>{{item.label}}</span>
         </label>
       </div>
+      <p v-if="error !== undefined" class="text-danger">{{error}}</p>
     </div>
   </div>
 </template>

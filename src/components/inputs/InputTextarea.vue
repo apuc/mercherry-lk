@@ -2,7 +2,7 @@
   <div>
     <div class="form-group">
       <label v-if="data.label !== undefined" :for="data.id">{{data.label}}</label>
-      <input :type="data.type || 'text'"
+      <textarea type="text"
              class="form-control"
              :id="data.id"
              :name="data.name"
@@ -11,6 +11,7 @@
              @blur="$emit('blur')"
              :value="value"
       >
+      </textarea>
       <p v-if="error !== undefined" class="text-danger">{{error}}</p>
     </div>
   </div>
@@ -20,7 +21,7 @@
   import inputMixin from '../../mixins/inputMixin';
 
   export default {
-    name: "InputText",
+    name: "InputTextarea",
     mixins: [inputMixin],
   }
 </script>

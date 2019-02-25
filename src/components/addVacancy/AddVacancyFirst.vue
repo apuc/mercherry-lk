@@ -1,15 +1,27 @@
 <template>
-  <form @submit.prevent="validateBeforeSubmit">
+  <form>
     <div class="row">
       <component
-          v-for="input in inputs"
+          v-for="(input, index) in inputs"
           :is="input.component"
           :class="input.className"
+          :key="input.data.name"
           :data="input.data"
-          @customInput="onCustomInput"
-          ref="inputs"
+          v-validate="input.rules"
+          @input="onInput"
+          :name="input.data.name"
+          v-model="value[input.data.name]"
+          :error="errors.first(input.data.name)"
+          @countPlus="onCountPlus"
+          :index="index"
       >
       </component>
+      <div class="col-12 d-flex">
+        <div class="btn-group ml-auto">
+          <button type="button" class="btn btn-secondary disabled">Предыдущий шаг</button>
+          <button type="button" class="btn btn-secondary" @click.prevent="validateBeforeSubmit">Следующий шаг</button>
+        </div>
+      </div>
     </div>
   </form>
 </template>
@@ -17,20 +29,26 @@
 <script>
   import InputText from "../inputs/InputText";
   import InputSelect from "../inputs/InputSelect";
-  import {mapMutations} from 'vuex';
   import InputRadio from "../inputs/InputRadio";
-  import wrapInputMixin from '../../mixins/wrapInputMixin';
+  import {mapMutations} from 'vuex';
+  import InputAdd from "../inputs/InputAdd";
+  import InputTextarea from "../inputs/InputTextarea";
+  import addVacancyMixin from "../../mixins/addVacancyMixin"
 
   export default {
     name: "AddVacancyFirst",
-    components: {InputRadio, InputSelect, InputText},
+    components: {InputTextarea, InputAdd, InputRadio, InputSelect, InputText},
     data() {
       return {
         inputs: [
           {
             component: 'InputSelect',
             className: 'col-12',
+            rules: {
+              required: true,
+            },
             data: {
+              id: 'project',
               label: 'Проект',
               name: 'project',
               options: [
@@ -43,19 +61,71 @@
           {
             component: 'InputText',
             className: 'col-12',
+            rules: {
+              required: true
+            },
             data: {
+              id: 'label',
               label: 'Название вакансии (это будет видно мерчендайзерам)',
               name: 'label',
-              validate: 'required',
+            }
+          },
+          {
+            component: 'InputSelect',
+            className: 'col-12',
+            data: {
+              id: 'employment',
+              label: 'Занятость',
+              name: 'employment',
+              options: [
+                'item1',
+                'item2',
+                'item3'
+              ]
+            }
+          },
+          {
+            component: 'InputSelect',
+            className: 'col-12',
+            rules: {
+              required: true,
+            },
+            data: {
+              id: 'typeVacancy',
+              label: 'Тип вакансии',
+              name: 'typeVacancy',
+              options: [
+                'item1',
+                'item2',
+                'item3'
+              ]
+            }
+          },
+          {
+            component: 'InputAdd',
+            className: 'col-12',
+            data: {
+              inputType: 'select',
+              id: 'typeProduct',
+              label: 'Тип продукта',
+              name: 'typeProduct',
+              options: [
+                'item1',
+                'item2',
+                'item3'
+              ],
+              addComponent: {
+                className: 'col-12',
+                component: 'InputSelect',
+              }
             }
           },
           {
             component: 'InputRadio',
             className: 'col-12',
             data: {
-              label: 'Анкета',
-              name: 'profile',
-              validate: 'required',
+              label: 'Медицинская книжка',
+              name: 'm_book',
               radio: [
                 {
                   value: 1,
@@ -67,31 +137,107 @@
                 }
               ]
             }
-          }
-        ]
+          },
+          {
+            component: 'InputRadio',
+            className: 'col-12',
+            data: {
+              label: 'КПК (мобильный телефон)',
+              name: 'mobile',
+              radio: [
+                {
+                  value: 1,
+                  label: 'Да'
+                },
+                {
+                  value: 2,
+                  label: 'Нет'
+                }
+              ]
+            }
+          },
+          {
+            component: 'InputTextarea',
+            className: 'col-12',
+            data: {
+              id: 'description',
+              label: 'Описание вакансии',
+              name: 'description',
+            }
+          },
+          {
+            component: 'InputRadio',
+            className: 'col-12',
+            data: {
+              label: 'Наличие автомобиля',
+              name: 'auto',
+              radio: [
+                {
+                  value: 1,
+                  label: 'Да'
+                },
+                {
+                  value: 2,
+                  label: 'Нет'
+                }
+              ]
+            }
+          },
+          {
+            component: 'InputRadio',
+            className: 'col-12',
+            data: {
+              label: 'Анкета',
+              name: 'profile',
+              radio: [
+                {
+                  value: 1,
+                  label: 'Да'
+                },
+                {
+                  value: 2,
+                  label: 'Нет'
+                }
+              ]
+            }
+          },
+          {
+            component: 'InputRadio',
+            className: 'col-12',
+            data: {
+              label: 'Обучение перед собеседованием',
+              name: 'education',
+              radio: [
+                {
+                  value: 1,
+                  label: 'Да'
+                },
+                {
+                  value: 2,
+                  label: 'Нет'
+                }
+              ]
+            }
+          },
+          {
+            component: 'InputText',
+            className: 'col-12',
+            data: {
+              type: 'number',
+              id: 'duration_internship',
+              label: 'Длительность стажировки (дней)',
+              name: 'duration_internship',
+            }
+          },
+        ],
       }
     },
     methods: {
-      validateBeforeSubmit() {
-        this.checkInput();
-        this.$validator.validateAll().then((result) => {
-          if (result) {
-            alert('Form Submitted!');
-            return;
-          }
-
-          alert('Correct them errors!');
-        });
-      },
       ...mapMutations({
         ADD_DATA_VACANCY: 'addVacancy/ADD_DATA_VACANCY'
       }),
-      onCustomInput(obj) {
-        this.ADD_DATA_VACANCY({value: obj.value, name: obj.name});
-        this.$emit('inputUpdate');
-      }
     },
-    mixins: [wrapInputMixin]
+    mixins: [addVacancyMixin]
   }
 </script>
 

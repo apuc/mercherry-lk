@@ -22,6 +22,16 @@ Vue.use(VeeValidate, {
   events: 'change'
 });
 
+const dictionary = {
+  ru: {
+    messages: {
+      _default: () => "Необходимо заполнить поле."
+    }
+  },
+};
+
+Validator.localize('ru', dictionary.ru);
+
 Validator.extend('verify_password', {
   getMessage: field => 'Минимум 6 символов.',
   validate: value => {

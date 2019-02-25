@@ -5,14 +5,14 @@
     >
       <button v-if="dataTabs.click"
               class="nav-link"
-              :class="{active: item.name === dataTabs.currentTab, disabled: item.disabled}"
+              :class="{active: item.name === dataTabs.currentTab, disabled: item.disabled, 'nav-link-success': item.done}"
               @click="tabClick(item.name)"
       >
         {{item.label}}
       </button>
       <span v-else
             class="nav-link"
-            :class="{active: item.name === dataTabs.currentTab, disabled: item.disabled}"
+            :class="{active: item.name === dataTabs.currentTab, disabled: item.disabled, 'nav-link-success': item.done}"
       >
          {{item.label}}
       </span>
@@ -54,6 +54,13 @@
       &.active {
         color: #222222;
         border-color: #ebedf2 #ebedf2 #ffffff;
+      }
+      &-success {
+        margin-bottom: -2px;
+        border-bottom: 3px solid #6fd96f;
+        &:hover {
+          border-bottom: 3px solid #6fd96f;
+        }
       }
     }
   }
