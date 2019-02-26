@@ -8,12 +8,19 @@
         </div>
         <form  class="forms-sample">
           <div class="form-group">
-            <label for="title">Название</label>
-            <input type="text" class="form-control" id="title">
+            <label for="label">Название</label>
+            <input type="text"
+                   class="form-control"
+                   id="label"
+                   v-model="data.label"
+                   name="label"
+                   v-validate="'required'"
+            >
+            <p class="text-danger">{{errors.first('label')}}</p>
           </div>
           <div class="form-group">
-            <label for="description">Описание</label>
-            <textarea class="form-control" id="description" rows="4"></textarea>
+            <label for="text">Описание</label>
+            <textarea class="form-control" id="text" rows="4" v-model="data.text"></textarea>
           </div>
           <div class="form-group" v-for="item in files">
             <label class="d-inline-block mr-2">{{item.label}}</label>
@@ -21,9 +28,14 @@
           </div>
           <div class="form-group">
             <label for="link">Сслыка на сайт</label>
-            <input type="text" class="form-control" id="link">
+            <input type="text"
+                   class="form-control"
+                   id="link"
+                   v-model="data.url"
+            >
           </div>
-          <button class="btn btn-success">Сохранить</button>
+          <button class="btn btn-success" @click.prevent="validateBeforeSubmit">Сохранить</button>
+          <p v-if="success">Проект добавлен</p>
         </form>
       </div>
     </div>
@@ -31,6 +43,8 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex';
+
   export default {
     name: "AddProject",
     data() {
@@ -38,50 +52,67 @@
         files: [
           {
             label: 'Изображение',
-            name: 'img'
+            name: 'image_id'
           },
           {
             label: 'Видео',
-            name: 'video'
+            name: 'video_id'
           },
           {
             label: 'Презентация',
-            name: 'presentation'
+            name: 'presentation_id'
           }
-        ]
+        ],
+        data: {
+          label: '',
+          text: '',
+          image_id: '',
+          video_id: '',
+          presentation_id: '',
+          url: ''
+        },
+        success: false
       }
     },
     methods: {
-      setAvatarFormData(e) {
-        const files = e.target.files || e.dataTransfer.files;
-        const fileType = files[0].type.split('/');
+      ...mapActions({
+        ADD_PROJECT: 'project/ADD_PROJECT'
+      }),
+      validateBeforeSubmit() {
+        this.$validator.validateAll().then((result) => {
+          if (result) {
+            this.ADD_PROJECT(this.data)
+              .then(res => {
+                if (res.ok) {
 
-        if (files.length && fileType[0] === 'image') {
-          this.createFormData(files[0]);
-        }
-      },
-      createFormData(file) {
-        let formData = new FormData();
-        formData.append('file', file);
-        this.img = formData;
-        console.log(this.img)
+                }
+                else {
+
+                }
+                console.log(res)
+              });
+          }
+        });
       },
     },
-    created() {
-      $(document).ready(function() {
-        if ($(".fileuploader").length) {
-          $(".fileuploader").each(function(index, value) {
-            $(value).uploadFile({
-              autoSubmit: false,
-              fileName: "myfile",
-              onSelect:function(files)
-              {
-                console.log(files)
-              }
+    mounted() {
+      setTimeout(function() {
+        $(document).ready(function() {
+          if ($(".fileuploader").length) {
+            $(".fileuploader").each(function(index, value) {
+              $(value).uploadFile({
+                autoSubmit: false,
+                fileName: "myfile",
+                onSelect:function(files)
+                {
+                  const name = this.files[index].name;
+                  this.data[name] = files[0];
+                }
+              });
             });
-          });
-        }
-      });
+          }
+        });
+      }, 100)
     }
   }
 </script>
