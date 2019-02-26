@@ -44,6 +44,9 @@
           {
             component: 'InputText',
             className: 'col-12',
+            rules: {
+              required: true
+            },
             data: {
               id: 'city',
               label: 'Город',
@@ -86,6 +89,9 @@
           {
             component: 'InputText',
             className: 'col-12',
+            rules: {
+              required: true
+            },
             data: {
               id: 'schedule',
               label: 'График работы',
@@ -95,6 +101,9 @@
           {
             component: 'InputText',
             className: 'col-12',
+            rules: {
+              required: true
+            },
             data: {
               type: 'number',
               id: 'total_salary',
@@ -153,6 +162,9 @@
           {
             component: 'InputSelect',
             className: 'col-12',
+            rules: {
+              required: true
+            },
             data: {
               id: 'experience',
               label: 'Опыт работы',
@@ -169,7 +181,7 @@
     },
     methods: {
       ...mapMutations({
-        ADD_DATA_VACANCY: 'addVacancy/ADD_DATA_VACANCY'
+        ADD_DATA_VACANCY: 'vacancy/ADD_DATA_VACANCY'
       }),
     },
     mixins: [addVacancyMixin]

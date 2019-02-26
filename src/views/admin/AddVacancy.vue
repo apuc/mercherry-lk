@@ -89,9 +89,15 @@
             value: 1,
             item: 3
           },
-          education: {
-            value: 1,
-            item: 4
+          several: {
+            interview_training: {
+              value: 1,
+              item: 4
+            },
+            internship_training: {
+              value: 1,
+              item: 4
+            }
           }
         },
         mainTitle: ''
@@ -99,19 +105,22 @@
     },
     computed: {
       ...mapGetters({
-        getAddVacancyData: 'addVacancy/getAddVacancyData'
+        getAddVacancyData: 'vacancy/getAddVacancyData'
       })
     },
     methods: {
       onInputUpdate() {
-        for (let key in this.tabDisabled) {
-          let item = this.tabDisabled[key];
-          if (this.getAddVacancyData[key] == item.value) {
-            this.dataTabs.tabs[item.item].disabled = false;
-          }
-          else {
-            this.dataTabs.tabs[item.item].disabled = true;
-          }
+        if (this.getAddVacancyData.need_questions == 1) {
+          this.dataTabs.tabs[3].disabled = false;
+        }
+        else {
+          this.dataTabs.tabs[3].disabled = true;
+        }
+        if (this.getAddVacancyData.interview_training == 1 || this.getAddVacancyData.internship_training == 1) {
+          this.dataTabs.tabs[4].disabled = false
+        }
+        else {
+          this.dataTabs.tabs[4].disabled = true;
         }
       },
       title() {

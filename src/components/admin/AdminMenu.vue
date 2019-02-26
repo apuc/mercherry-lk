@@ -112,7 +112,7 @@
         margin-left: auto;
         color: #404852;
       }
-      &.router-link-exact-active:before {
+      &.router-link-active:before {
         content: "";
         position: absolute;
         width: 5px;

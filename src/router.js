@@ -50,12 +50,12 @@ export default new Router({
       component: Password
     },
     {
-      path: '/add-project',
+      path: '/project/add',
       name: 'add-project',
       component: AddProject
     },
     {
-      path: '/add-vacancy',
+      path: '/vacancy/add',
       name: 'add-vacancy',
       component: AddVacancy
     }

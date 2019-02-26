@@ -41,6 +41,9 @@
           {
             component: 'InputRadio',
             className: 'col-12',
+            rules: {
+              required: true
+            },
             data: {
               label: 'Кто проводит собеседование',
               name: 'interviewer',
@@ -77,7 +80,7 @@
             component: 'InputRadio',
             className: 'col-12',
             data: {
-              label: 'Кто проводит собеседование',
+              label: 'Есть ли повторное собеседование',
               name: 'repeat_interview',
               radio: [
                 {
@@ -124,7 +127,7 @@
     },
     methods: {
       ...mapMutations({
-        ADD_DATA_VACANCY: 'addVacancy/ADD_DATA_VACANCY'
+        ADD_DATA_VACANCY: 'vacancy/ADD_DATA_VACANCY'
       }),
     },
     computed: {

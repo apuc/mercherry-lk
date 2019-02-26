@@ -73,6 +73,9 @@
           {
             component: 'InputSelect',
             className: 'col-12',
+            rules: {
+              required: true
+            },
             data: {
               id: 'employment',
               label: 'Занятость',
@@ -91,9 +94,9 @@
               required: true,
             },
             data: {
-              id: 'typeVacancy',
+              id: 'type',
               label: 'Тип вакансии',
-              name: 'typeVacancy',
+              name: 'type',
               options: [
                 'item1',
                 'item2',
@@ -104,11 +107,14 @@
           {
             component: 'InputAdd',
             className: 'col-12',
+            rules: {
+              required: true,
+            },
             data: {
               inputType: 'select',
-              id: 'typeProduct',
+              id: 'product_type',
               label: 'Тип продукта',
-              name: 'typeProduct',
+              name: 'product_type',
               options: [
                 'item1',
                 'item2',
@@ -123,6 +129,9 @@
           {
             component: 'InputRadio',
             className: 'col-12',
+            rules: {
+              required: true
+            },
             data: {
               label: 'Медицинская книжка',
               name: 'm_book',
@@ -141,6 +150,9 @@
           {
             component: 'InputRadio',
             className: 'col-12',
+            rules: {
+              required: true
+            },
             data: {
               label: 'КПК (мобильный телефон)',
               name: 'mobile',
@@ -186,9 +198,12 @@
           {
             component: 'InputRadio',
             className: 'col-12',
+            rules: {
+              required: true
+            },
             data: {
               label: 'Анкета',
-              name: 'profile',
+              name: 'need_questions',
               radio: [
                 {
                   value: 1,
@@ -204,9 +219,33 @@
           {
             component: 'InputRadio',
             className: 'col-12',
+            rules: {
+              required: true
+            },
             data: {
               label: 'Обучение перед собеседованием',
-              name: 'education',
+              name: 'interview_training',
+              radio: [
+                {
+                  value: 1,
+                  label: 'Да'
+                },
+                {
+                  value: 2,
+                  label: 'Нет'
+                }
+              ]
+            }
+          },
+          {
+            component: 'InputRadio',
+            className: 'col-12',
+            rules: {
+              required: true
+            },
+            data: {
+              label: 'Обучение перед стажировкой',
+              name: 'internship_training',
               radio: [
                 {
                   value: 1,
@@ -234,7 +273,7 @@
     },
     methods: {
       ...mapMutations({
-        ADD_DATA_VACANCY: 'addVacancy/ADD_DATA_VACANCY'
+        ADD_DATA_VACANCY: 'vacancy/ADD_DATA_VACANCY'
       }),
     },
     mixins: [addVacancyMixin]
