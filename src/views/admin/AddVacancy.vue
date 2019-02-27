@@ -110,13 +110,13 @@
     },
     methods: {
       onInputUpdate() {
-        if (this.getAddVacancyData.need_questions == 1) {
+        if (this.getAddVacancyData.need_questions === "true") {
           this.dataTabs.tabs[3].disabled = false;
         }
         else {
           this.dataTabs.tabs[3].disabled = true;
         }
-        if (this.getAddVacancyData.interview_training == 1 || this.getAddVacancyData.internship_training == 1) {
+        if (this.getAddVacancyData.interview_training === "true" || this.getAddVacancyData.internship_training === "true") {
           this.dataTabs.tabs[4].disabled = false
         }
         else {

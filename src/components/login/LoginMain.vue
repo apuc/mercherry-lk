@@ -6,7 +6,6 @@
         <div class="col-md-6 col-lg-5 pt-10 pb-5">
           <div class="accordion-group accordion-group-portal">
             <LoginAuth/>
-            <LoginReg/>
           </div>
         </div>
       </div>
@@ -16,10 +15,9 @@
 
 <script>
   import LoginAuth from "./LoginAuth";
-  import LoginReg from "./LoginReg";
   export default {
     name: "LoginMain",
-    components: {LoginReg, LoginAuth}
+    components: {LoginAuth}
   }
 </script>
 

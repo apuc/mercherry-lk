@@ -4,10 +4,6 @@ const inputMixin = {
       return this.value;
     }
   },
-  data() {
-    return {
-    }
-  },
   props: {
     data: {
       type: Object,
@@ -17,7 +13,6 @@ const inputMixin = {
       type: String
     },
     value: {
-      type: String,
       default: ''
     },
     index: {

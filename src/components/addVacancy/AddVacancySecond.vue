@@ -34,15 +34,16 @@
   import InputAdd from "../inputs/InputAdd";
   import InputTextarea from "../inputs/InputTextarea";
   import addVacancyMixin from "../../mixins/addVacancyMixin"
+  import InputDropdown from "../inputs/InputDropdown";
 
   export default {
     name: "AddVacancySecond",
-    components: {InputTextarea, InputAdd, InputRadio, InputSelect, InputText},
+    components: {InputDropdown, InputTextarea, InputAdd, InputRadio, InputSelect, InputText},
     data() {
       return {
         inputs: [
           {
-            component: 'InputText',
+            component: 'InputDropdown',
             className: 'col-12',
             rules: {
               required: true

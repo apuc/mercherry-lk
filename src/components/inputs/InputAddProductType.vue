@@ -9,6 +9,7 @@
                :id="data.id"
                :name="data.name"
                @input="updateValue"
+               @change="updateValue"
                @blur="$emit('blur')"
                :value="value"
         >
@@ -17,6 +18,7 @@
                 :id="data.id"
                 :name="data.name"
                 @input="updateValue"
+                @change="updateValue"
                 @blur="$emit('blur')"
                 :value="null"
         >
@@ -26,7 +28,7 @@
             {{option.label}}
           </option>
         </select>
-        <button type="button" class="btn btn-success ml-3" @click="countPlus">+</button>
+        <button type="button" class="btn btn-success ml-3" :data-target="data.modal" data-toggle="modal">+</button>
       </div>
       <p class="text-danger">{{error}}</p>
     </div>
@@ -37,34 +39,8 @@
   import inputMixin from '../../mixins/inputMixin';
 
   export default {
-    name: "InputAdd",
-    data() {
-      return {
-        count: 1,
-        dataAdd: {}
-      }
-    },
+    name: "InputAddProduct",
     methods: {
-      countPlus() {
-        this.newElem();
-        this.count++;
-        this.dataAdd.data.name = this.dataAdd.data.name + this.count;
-        this.$emit('countPlus', {
-          index: this.index + 1, data: this.dataAdd
-        });
-        this.dataAdd = {};
-      },
-      newElem() {
-        this.dataAdd = Object.assign(this.dataAdd, this.data.addComponent);
-        this.dataAdd.data = {};
-        for (let key in this.data) {
-          this.dataAdd.data[key] = this.data[key];
-        }
-        delete this.dataAdd.data.id;
-        delete this.dataAdd.data.label;
-        delete this.dataAdd.data.inputType;
-        delete this.dataAdd.data.addComponent;
-      },
       firstValue() {
         if (this.data.done) {
           this.$emit('input', this.data.options[0].id);

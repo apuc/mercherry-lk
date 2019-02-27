@@ -49,25 +49,22 @@ Validator.extend('verify_email_phone', {
   }
 });
 
-// router.beforeEach( async (to, from, next) => {
-//   const token = localStorage.getItem('token');
-//   if (token) {
-//     Vue.http.headers.common['Authorization'] = `Bearer ${token}`;
-//   }
-//   if(localStorage.getItem('token')) {
-//     await store.dispatch('profile/PROFILE');
-//   }
-//   else {
-//     store.commit('profile/AUTH', false);
-//   }
-//   if (to.meta.layout === 'auth' && store.getters['profile/auth']
-//     || to.path === '/profile' && !store.getters['profile/auth']) {
-//     next({name: 'home'})
-//   }
-//   else {
-//     next();
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    Vue.http.headers.common['Authorization'] = `Bearer ${token}`;
+    store.commit('profile/AUTH', true);
+    next();
+  }
+  else {
+    if (to.path === '/login' || to.path === '/password-reset') {
+      next();
+    }
+    else {
+      next({path: '/login'});
+    }
+  }
+});
 
 new Vue({
   router,

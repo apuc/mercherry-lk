@@ -7,7 +7,6 @@
              :id="data.id"
              :name="data.name"
              @input="updateValue"
-             @change="updateValue"
              @blur="$emit('blur')"
              :value="value"
       >

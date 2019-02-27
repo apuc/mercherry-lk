@@ -19,7 +19,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'admin',
+      name: 'home',
       redirect: '/projects',
     },
     {

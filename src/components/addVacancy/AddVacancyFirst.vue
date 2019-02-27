@@ -13,6 +13,7 @@
           v-model="value[input.data.name]"
           :error="errors.first(input.data.name)"
           @countPlus="onCountPlus"
+          @countMinus="onCountMinus"
           :index="index"
       >
       </component>
@@ -23,6 +24,7 @@
         </div>
       </div>
     </div>
+    <ModalAddProductType @newProductType="onNewProductType"/>
   </form>
 </template>
 
@@ -30,14 +32,16 @@
   import InputText from "../inputs/InputText";
   import InputSelect from "../inputs/InputSelect";
   import InputRadio from "../inputs/InputRadio";
-  import {mapMutations} from 'vuex';
+  import {mapMutations, mapActions} from 'vuex';
   import InputAdd from "../inputs/InputAdd";
   import InputTextarea from "../inputs/InputTextarea";
   import addVacancyMixin from "../../mixins/addVacancyMixin"
+  import InputAddProductType from "../inputs/InputAddProductType";
+  import ModalAddProductType from "./ModalAddProductType";
 
   export default {
     name: "AddVacancyFirst",
-    components: {InputTextarea, InputAdd, InputRadio, InputSelect, InputText},
+    components: {ModalAddProductType, InputAddProductType, InputTextarea, InputAdd, InputRadio, InputSelect, InputText},
     data() {
       return {
         inputs: [
@@ -48,14 +52,10 @@
               required: true,
             },
             data: {
-              id: 'project',
+              id: 'project_id',
               label: 'Проект',
-              name: 'project',
-              options: [
-                'item1',
-                'item2',
-                'item3'
-              ]
+              name: 'project_id',
+              options: []
             }
           },
           {
@@ -80,10 +80,20 @@
               id: 'employment',
               label: 'Занятость',
               name: 'employment',
+              done: true,
               options: [
-                'item1',
-                'item2',
-                'item3'
+                {
+                  id: 0,
+                  label: 'Полная занятость',
+                },
+                {
+                  id: 1,
+                  label: 'Частичная занятость',
+                },
+                {
+                  id: 2,
+                  label: 'Разовое задание',
+                }
               ]
             }
           },
@@ -97,15 +107,37 @@
               id: 'type',
               label: 'Тип вакансии',
               name: 'type',
+              done: true,
               options: [
-                'item1',
-                'item2',
-                'item3'
+                {
+                  id: 0,
+                  label: 'Мерчандайзинг стационарный'
+                },
+                {
+                  id: 1,
+                  label: 'Мерчандайзинг визитный'
+                },
+                {
+                  id: 2,
+                  label: 'Консультант стационарный'
+                },
+                {
+                  id: 3,
+                  label: 'Консультант визитный'
+                },
+                {
+                  id: 4,
+                  label: 'Аудит'
+                },
+                {
+                  id: 5,
+                  label: 'Тайный покупатель'
+                },
               ]
             }
           },
           {
-            component: 'InputAdd',
+            component: 'InputAddProductType',
             className: 'col-12',
             rules: {
               required: true,
@@ -115,15 +147,8 @@
               id: 'product_type',
               label: 'Тип продукта',
               name: 'product_type',
-              options: [
-                'item1',
-                'item2',
-                'item3'
-              ],
-              addComponent: {
-                className: 'col-12',
-                component: 'InputSelect',
-              }
+              options: [],
+              modal: '#modalAddProductType'
             }
           },
           {
@@ -137,11 +162,11 @@
               name: 'm_book',
               radio: [
                 {
-                  value: 1,
+                  value: true,
                   label: 'Да'
                 },
                 {
-                  value: 2,
+                  value: false,
                   label: 'Нет'
                 }
               ]
@@ -158,14 +183,23 @@
               name: 'mobile',
               radio: [
                 {
-                  value: 1,
+                  value: true,
                   label: 'Да'
                 },
                 {
-                  value: 2,
+                  value: false,
                   label: 'Нет'
                 }
-              ]
+              ],
+              addField: {
+                component: 'InputText',
+                className: 'col-12',
+                data: {
+                  id: 'mobile_req',
+                  label: 'КПК требования',
+                  name: 'mobile_req'
+                }
+              }
             }
           },
           {
@@ -185,11 +219,11 @@
               name: 'auto',
               radio: [
                 {
-                  value: 1,
+                  value: true,
                   label: 'Да'
                 },
                 {
-                  value: 2,
+                  value: false,
                   label: 'Нет'
                 }
               ]
@@ -206,11 +240,11 @@
               name: 'need_questions',
               radio: [
                 {
-                  value: 1,
+                  value: true,
                   label: 'Да'
                 },
                 {
-                  value: 2,
+                  value: false,
                   label: 'Нет'
                 }
               ]
@@ -227,11 +261,11 @@
               name: 'interview_training',
               radio: [
                 {
-                  value: 1,
+                  value: true,
                   label: 'Да'
                 },
                 {
-                  value: 2,
+                  value: false,
                   label: 'Нет'
                 }
               ]
@@ -248,11 +282,11 @@
               name: 'internship_training',
               radio: [
                 {
-                  value: 1,
+                  value: true,
                   label: 'Да'
                 },
                 {
-                  value: 2,
+                  value: false,
                   label: 'Нет'
                 }
               ]
@@ -275,6 +309,48 @@
       ...mapMutations({
         ADD_DATA_VACANCY: 'vacancy/ADD_DATA_VACANCY'
       }),
+      ...mapActions({
+        PROJECT_LIST: 'project/PROJECT_LIST',
+        PRODUCT_TYPE: 'productType/PRODUCT_TYPE'
+      }),
+      onNewProductType() {
+        this.PRODUCT_TYPE()
+          .then(res => {
+            for (let value of this.inputs) {
+              if (value.data.name === 'product_type') {
+                value.data.options = [];
+                for (let key in res.body) {
+                  value.data.options.push({id: parseInt(key), label: res.body[key]});
+                }
+                break;
+              }
+            }
+          })
+      }
+    },
+    created() {
+      this.PROJECT_LIST()
+        .then(res => {
+          for (let value of this.inputs) {
+            if (value.data.name === 'project_id') {
+              value.data.options = res.body.result;
+              value.data.done = true;
+              break;
+            }
+          }
+        });
+      this.PRODUCT_TYPE()
+        .then(res => {
+          for (let value of this.inputs) {
+            if (value.data.name === 'product_type') {
+              for (let key in res.body) {
+                value.data.options.push({id: parseInt(key), label: res.body[key]});
+              }
+              value.data.done = true;
+              break;
+            }
+          }
+        })
     },
     mixins: [addVacancyMixin]
   }

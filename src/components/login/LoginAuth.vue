@@ -8,29 +8,29 @@
       <div class="accordion-content-wrapper">
         <form @submit.prevent="validateBeforeSubmit">
           <div class="form-group field-loginform-login">
-            <label class="control-label" for="loginform-login">Email или номер телефона</label>
+            <label class="control-label" for="loginform-login">Email</label>
             <input type="text"
                    id="loginform-login"
                    class="form-control"
                    :class="{'is-valid': loginFlags.valid, 'is-invalid': errors.has('login') }"
                    name="login"
                    v-model="login"
-                   v-validate="'required|min:2|verify_email_phone'"
+                   v-validate="'required|email'"
             >
           </div>
 
           <div class="form-group field-loginform-password">
             <label class="control-label d-block" for="loginform-password">
               Пароль
-              <input type="password"
-                     id="loginform-password"
-                     class="form-control"
-                     :class="{'is-valid': passwordFlags.valid, 'is-invalid': errors.has('password') }"
-                     name="password"
-                     v-model="password"
-                     v-validate="'required|min:6|verify_password'"
-              >
             </label>
+            <input type="password"
+                   id="loginform-password"
+                   class="form-control"
+                   :class="{'is-valid': passwordFlags.valid, 'is-invalid': errors.has('password') }"
+                   name="password"
+                   v-model="password"
+                   v-validate="'required|min:6|verify_password'"
+            >
             <p v-if="err.hasOwnProperty('password')" class="text-danger">
               {{err.password}}
             </p>
@@ -71,7 +71,7 @@
       }),
       enter() {
         this.LOGIN({
-          login: this.login,
+          email: this.login,
           password: this.password
         }).then(data => {
           if (data.ok) {

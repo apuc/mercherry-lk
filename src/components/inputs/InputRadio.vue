@@ -9,7 +9,6 @@
                  :value="item.value"
                  :name="data.name"
                  @input="updateValue"
-                 @change="updateValue"
                  @blur="$emit('blur')"
           >
           <i class="input-helper"></i>
@@ -26,6 +25,25 @@
 
   export default {
     name: "InputRadio",
+    data() {
+      return {
+        done: false
+      }
+    },
+    methods: {
+      updateValue(e) {
+        if (this.data.addField !== undefined) {
+          if (e.target.value === "true") {
+            this.done = true;
+            this.$emit('countPlus', {index: this.index + 1, data: this.data.addField});
+          }
+          else if (e.target.value === "false" && this.done) {
+            this.$emit('countMinus', this.index + 1);
+          }
+        }
+        this.$emit("input", e.target.value);
+      }
+    },
     mixins: [inputMixin]
   }
 </script>
