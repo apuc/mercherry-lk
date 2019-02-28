@@ -36,12 +36,11 @@
   import InputAdd from "../inputs/InputAdd";
   import InputTextarea from "../inputs/InputTextarea";
   import addVacancyMixin from "../../mixins/addVacancyMixin"
-  import InputAddProductType from "../inputs/InputAddProductType";
   import ModalAddProductType from "./ModalAddProductType";
 
   export default {
     name: "AddVacancyFirst",
-    components: {ModalAddProductType, InputAddProductType, InputTextarea, InputAdd, InputRadio, InputSelect, InputText},
+    components: {ModalAddProductType, InputTextarea, InputAdd, InputRadio, InputSelect, InputText},
     data() {
       return {
         inputs: [
@@ -137,13 +136,12 @@
             }
           },
           {
-            component: 'InputAddProductType',
+            component: 'InputSelect',
             className: 'col-12',
             rules: {
               required: true,
             },
             data: {
-              inputType: 'select',
               id: 'product_type',
               label: 'Тип продукта',
               name: 'product_type',

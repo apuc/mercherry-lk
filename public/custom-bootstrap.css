@@ -943,7 +943,8 @@ fieldset:disabled a {
     vertical-align: top;
     margin-bottom: .5rem;
 }
-.form-control {
+.form-control,
+.v-select .dropdown-toggle {
     border: 1px solid #d4d7da;
     height: 45px;
     font-weight: 400;

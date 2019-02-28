@@ -29,10 +29,7 @@ export default {
   },
 
   'NETWORK_LIST': async (context, params) => {
-    return await Vue.http.get(`${process.env.VUE_APP_API_URL}/info/network`, {params: {
-        q: params.q,
-        city: params.city
-      }})
+    return await Vue.http.get(`${process.env.VUE_APP_API_URL}/networks`, {params: params})
       .then(
         res => {
           return res;

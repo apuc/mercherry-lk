@@ -13,6 +13,7 @@
           v-model="value[input.data.name]"
           :error="errors.first(input.data.name)"
           @countPlus="onCountPlus"
+          @countMinus="onCountMinus"
           :index="index"
       >
       </component>
@@ -46,14 +47,14 @@
             },
             data: {
               label: 'Кто проводит собеседование',
-              name: 'interviewer',
+              name: 'interviewing',
               radio: [
                 {
-                  value: 1,
+                  value: 0,
                   label: 'Тот кто разместил вакансию'
                 },
                 {
-                  value: 2,
+                  value: 1,
                   label: 'Другой специалист'
                 }
               ]
@@ -66,30 +67,21 @@
               required: true,
             },
             data: {
-              id: 'frequency',
+              id: 'notify_freq',
               label: 'Частота оповещений',
-              name: 'frequency',
+              name: 'notify_freq',
               options: [
-                'item1',
-                'item2',
-                'item3'
-              ]
-            }
-          },
-          {
-            component: 'InputRadio',
-            className: 'col-12',
-            data: {
-              label: 'Есть ли повторное собеседование',
-              name: 'repeat_interview',
-              radio: [
                 {
-                  value: 1,
-                  label: 'Да'
+                  id: 0,
+                  label: 'Каждый день'
                 },
                 {
-                  value: 2,
-                  label: 'Нет'
+                  id: 1,
+                  label: 'Через день'
+                },
+                {
+                  id: 2,
+                  label: 'Раз в два дня'
                 }
               ]
             }
@@ -98,15 +90,52 @@
             component: 'InputRadio',
             className: 'col-12',
             data: {
-              label: 'Кто координирует выход на стажировку',
-              name: 'coordinator',
+              label: 'Есть ли повторное собеседование',
+              name: 'interviewing_repeat',
               radio: [
                 {
-                  value: 1,
+                  value: true,
+                  label: 'Да'
+                },
+                {
+                  value: false,
+                  label: 'Нет'
+                }
+              ],
+              addField: {
+                component: 'InputRadio',
+                className: 'col-12',
+                data: {
+                  id: 'interviewing_repeat_who',
+                  label: 'Кто проводит повторное собеседование',
+                  name: 'interviewing_repeat_who',
+                  radio: [
+                    {
+                      value: 0,
+                      label: 'Тот кто разместил вакансию'
+                    },
+                    {
+                      value: 1,
+                      label: 'Другой специалист'
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            component: 'InputRadio',
+            className: 'col-12',
+            data: {
+              label: 'Кто координирует выход на стажировку',
+              name: 'internship_coord',
+              radio: [
+                {
+                  value: 0,
                   label: 'Тот кто создал'
                 },
                 {
-                  value: 2,
+                  value: 1,
                   label: 'Другой'
                 }
               ]

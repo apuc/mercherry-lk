@@ -16,6 +16,7 @@
           :index="index"
       >
       </component>
+
       <div class="col-12 d-flex">
         <div class="btn-group ml-auto">
           <button type="button" class="btn btn-secondary" @click="$emit('prev')">Предыдущий шаг</button>
@@ -23,6 +24,7 @@
         </div>
       </div>
     </div>
+    <ModalAddNetwork/>
   </form>
 </template>
 
@@ -34,11 +36,12 @@
   import InputAdd from "../inputs/InputAdd";
   import InputTextarea from "../inputs/InputTextarea";
   import addVacancyMixin from "../../mixins/addVacancyMixin"
+  import ModalAddNetwork from "./ModalAddNetwork";
   import InputDropdown from "../inputs/InputDropdown";
 
   export default {
     name: "AddVacancySecond",
-    components: {InputDropdown, InputTextarea, InputAdd, InputRadio, InputSelect, InputText},
+    components: {ModalAddNetwork, InputDropdown, InputTextarea, InputAdd, InputRadio, InputSelect, InputText},
     data() {
       return {
         inputs: [
@@ -51,40 +54,30 @@
             data: {
               id: 'city',
               label: 'Город',
-              name: 'city',
+              name: 'city'
             }
           },
           {
-            component: 'InputSelect',
+            component: 'InputDropdown',
             className: 'col-12',
             data: {
               id: 'district',
               label: 'Район города',
               name: 'district',
-              options: [
-                'item1',
-                'item2',
-                'item3'
+              params: [
+                'city'
               ]
             }
           },
           {
-            component: 'InputAdd',
+            component: 'InputDropdown',
             className: 'col-12',
             data: {
-              inputType: 'select',
               id: 'network',
               label: 'Сеть',
               name: 'network',
-              options: [
-                'item1',
-                'item2',
-                'item3'
-              ],
-              addComponent: {
-                className: 'col-12',
-                component: 'InputSelect',
-              }
+              modal: '#modalAddNetwork',
+              multiply: true
             }
           },
           {
@@ -145,7 +138,6 @@
             component: 'InputText',
             className: 'col-12',
             data: {
-              type: 'number',
               id: 'point_count',
               label: 'Количество точек',
               name: 'point_count',
@@ -171,9 +163,22 @@
               label: 'Опыт работы',
               name: 'experience',
               options: [
-                'item1',
-                'item2',
-                'item3'
+                {
+                  id: 0,
+                  label: 'Без опыта'
+                },
+                {
+                  id: 1,
+                  label: 'Опыт не менее 1 месяца'
+                },
+                {
+                  id: 2,
+                  label: 'Опыт не менее 1 года'
+                },
+                {
+                  id: 3,
+                  label: 'Прочее'
+                }
               ]
             }
           },

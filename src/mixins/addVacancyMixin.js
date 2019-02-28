@@ -48,6 +48,9 @@ const addVacancyMixin = {
       this.inputs.splice(index, 1);
     }
   },
+  mounted() {
+
+  }
 };
 
 export default addVacancyMixin;

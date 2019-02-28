@@ -1,11 +1,11 @@
 <template>
-  <div class="modal fade" id="modalAddProductType">
+  <div class="modal fade" id="modalAddNetwork">
     <button data-dismiss="modal" class="d-none" ref="modalClose"></button>
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <form>
           <div class="modal-body pb-0">
-            <h3 class="text-center">Добавление типа продукта</h3>
+            <h3 class="text-center">Добавление сети</h3>
             <InputText :data="data"
                        v-validate="'required'"
                        :error="errors.first(data.name)"
@@ -27,30 +27,30 @@
   import {mapActions} from 'vuex';
 
   export default {
-    name: "ModalAddProductType",
+    name: "ModalAddNetwork",
     components: {InputText},
     data() {
       return {
         data: {
-          id: 'inputAddProductType',
-          label: 'Тип продукта',
-          name: 'inputAddProductType'
+          id: 'inputAddNetwork',
+          label: 'Сеть',
+          name: 'inputAddNetwork'
         },
         value: ''
       }
     },
     methods: {
       ...mapActions({
-        PRODUCT_TYPE_ADD: 'productType/PRODUCT_TYPE_ADD'
+        NETWORK_ADD: 'network/NETWORK_ADD'
       }),
       validateBeforeSubmit() {
         this.$validator.validateAll().then((result) => {
           if (result) {
-            this.PRODUCT_TYPE_ADD({name: this.value})
+            this.NETWORK_ADD({name: this.value})
               .then(res => {
                 if (res.ok) {
                   this.$refs.modalClose.click();
-                  this.$emit('newProductType');
+                  this.$emit('newNetwork');
                 }
               })
           }

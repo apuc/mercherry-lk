@@ -2,23 +2,20 @@
   <div>
     <div class="form-group">
       <label v-if="data.label !== undefined" :for="data.id">{{data.label}}</label>
-      <div class="position-relative">
-        <input :type="data.type || 'text'"
-               class="form-control"
-               :id="data.id"
-               :name="data.name"
-               @input="dropdownRequest"
-               @blur="$emit('blur')"
-               :value="value"
+      <div class="d-flex">
+        <v-select :multiple="data.multiply"
+                  :close-on-select="!data.multiply"
+                  :options="dropdownValue"
+                  @search="search"
+                  :name="data.name"
+                  :id="data.id"
+                  :value="value"
+                  @input="updateValue"
+                  @blur="$emit('blur')"
         >
-        <!--<ul class="dropdown-input" v-if="profileCity.length > 0 && focused && dropdownValue.length > 0">-->
-          <!--<li v-for="(dropdownItem, index) in dropdownValue"-->
-              <!--ref="cityDrop"-->
-              <!--@click="choiceValue('city', index)"-->
-          <!--&gt;-->
-            <!--{{dropdownItem}}-->
-          <!--</li>-->
-        <!--</ul>-->
+        </v-select>
+
+        <button v-if="data.modal !== undefined" type="button" class="btn btn-success ml-3" :data-target="data.modal" data-toggle="modal">+</button>
       </div>
       <p v-if="error !== undefined" class="text-danger">{{error}}</p>
     </div>
@@ -27,27 +24,65 @@
 
 <script>
   import inputMixin from '../../mixins/inputMixin';
-  import _ from 'lodash';
+  import store from './../../store/store'
+  import _ from 'lodash'
 
   export default {
-    name: "InputDropdown",
+    name: "InputSelectMultiple",
     data() {
       return {
-        focused: false,
         dropdownValue: []
       }
     },
     methods: {
-      dropdownRequest:
-        _.debounce(function(e) {
-          const name = this.data.name.charAt(0).toUpperCase() + this.data.name.slice(1);
-          this.$emit("input", e.target.value);
-        }, 200)
+      search(search, loading) {
+        loading(true);
+        this.getRepositories(search, loading, this)
+      },
+      getRepositories: _.debounce(function(search, loading) {
+        let obj = {q: search};
+        if (this.data.params !== undefined) {
+          for (let label of this.data.params) {
+            obj[label] = store.getters['vacancy/getAddVacancyData'][label];
+          }
+        }
+        store.dispatch(`lists/${this.data.name.toUpperCase()}_LIST`, obj)
+          .then(res => {
+            this.dropdownValue = [];
+            if (Array.isArray(res.body)) {
+              this.dropdownValue = res.body.slice(0, 10);
+            }
+            else {
+              let i = 0;
+              for (let key in res.body) {
+                if (i < 10) {
+                  this.dropdownValue.push(res.body[key]);
+                  i++;
+                }
+                else {
+                  break;
+                }
+              }
+            }
+            loading(false);
+          });
+      }, 250),
+      updateValue(value) {
+        this.$emit("input", value);
+      }
     },
     mixins: [inputMixin],
   }
 </script>
 
-<style scoped>
-
+<style>
+  .v-select {
+    width: 100%;
+  }
+  .v-select .vs__actions {
+    display: none !important;
+  }
+  .dropdown-toggle::after {
+    display: none;
+  }
 </style>

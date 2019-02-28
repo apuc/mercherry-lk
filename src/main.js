@@ -8,9 +8,11 @@ import {Validator} from 'vee-validate';
 import MainLayout from './views/layouts/MainLayout';
 import AuthLayout from './views/layouts/AuthLayout';
 import VueResource from 'vue-resource';
+import vSelect from 'vue-select'
 
 Vue.use(VueResource);
 
+Vue.component('v-select', vSelect);
 Vue.component('main-layout', MainLayout);
 Vue.component('auth-layout', AuthLayout);
 
