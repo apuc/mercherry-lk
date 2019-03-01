@@ -10,6 +10,7 @@
                  :name="data.name"
                  @input="updateValue"
                  @blur="$emit('blur')"
+                 v-model="checked"
           >
           <i class="input-helper"></i>
           <span>{{item.label}}</span>
@@ -27,21 +28,13 @@
     name: "InputRadio",
     data() {
       return {
-        done: false
+        checked: ''
       }
     },
-    methods: {
-      updateValue(e) {
-        if (this.data.addField !== undefined) {
-          if (e.target.value === "true") {
-            this.done = true;
-            this.$emit('countPlus', {index: this.index + 1, data: this.data.addField});
-          }
-          else if (e.target.value === "false" && this.done) {
-            this.$emit('countMinus', this.index + 1);
-          }
-        }
-        this.$emit("input", e.target.value);
+    created() {
+      this.checked = this.value;
+      if (this.checked !== '') {
+        this.updateValue({target: {value: this.checked}});
       }
     },
     mixins: [inputMixin]

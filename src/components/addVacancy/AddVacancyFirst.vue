@@ -18,7 +18,7 @@
       >
       </component>
       <div class="col-12 d-flex">
-        <div class="btn-group ml-auto">
+        <div class="btn-group flex-wrap ml-auto mb-2">
           <button type="button" class="btn btn-secondary disabled">Предыдущий шаг</button>
           <button type="button" class="btn btn-secondary" @click.prevent="validateBeforeSubmit">Следующий шаг</button>
         </div>
@@ -32,15 +32,14 @@
   import InputText from "../inputs/InputText";
   import InputSelect from "../inputs/InputSelect";
   import InputRadio from "../inputs/InputRadio";
-  import {mapMutations, mapActions} from 'vuex';
-  import InputAdd from "../inputs/InputAdd";
+  import {mapMutations, mapActions, mapGetters} from 'vuex';
   import InputTextarea from "../inputs/InputTextarea";
   import addVacancyMixin from "../../mixins/addVacancyMixin"
   import ModalAddProductType from "./ModalAddProductType";
 
   export default {
     name: "AddVacancyFirst",
-    components: {ModalAddProductType, InputTextarea, InputAdd, InputRadio, InputSelect, InputText},
+    components: {ModalAddProductType, InputTextarea, InputRadio, InputSelect, InputText},
     data() {
       return {
         inputs: [
@@ -79,7 +78,6 @@
               id: 'employment',
               label: 'Занятость',
               name: 'employment',
-              done: true,
               options: [
                 {
                   id: 0,
@@ -106,7 +104,8 @@
               id: 'type',
               label: 'Тип вакансии',
               name: 'type',
-              done: true,
+              addFieldValue: [4, 5],
+              addIndex: 8,
               options: [
                 {
                   id: 0,
@@ -132,7 +131,25 @@
                   id: 5,
                   label: 'Тайный покупатель'
                 },
-              ]
+              ],
+              addField: {
+                component: 'InputRadio',
+                className: 'col-12',
+                data: {
+                  label: 'Аудиозапись',
+                  name: 'audio_record',
+                  radio: [
+                    {
+                      value: 1,
+                      label: 'Да'
+                    },
+                    {
+                      value: 0,
+                      label: 'Нет'
+                    }
+                  ]
+                }
+              }
             }
           },
           {
@@ -146,7 +163,7 @@
               label: 'Тип продукта',
               name: 'product_type',
               options: [],
-              modal: '#modalAddProductType'
+              modal: '#modalAddProductType',
             }
           },
           {
@@ -160,11 +177,11 @@
               name: 'm_book',
               radio: [
                 {
-                  value: true,
+                  value: 1,
                   label: 'Да'
                 },
                 {
-                  value: false,
+                  value: 0,
                   label: 'Нет'
                 }
               ]
@@ -179,13 +196,14 @@
             data: {
               label: 'КПК (мобильный телефон)',
               name: 'mobile',
+              addFieldValue: [1],
               radio: [
                 {
-                  value: true,
+                  value: 1,
                   label: 'Да'
                 },
                 {
-                  value: false,
+                  value: 0,
                   label: 'Нет'
                 }
               ],
@@ -217,11 +235,11 @@
               name: 'auto',
               radio: [
                 {
-                  value: true,
+                  value: 1,
                   label: 'Да'
                 },
                 {
-                  value: false,
+                  value: 0,
                   label: 'Нет'
                 }
               ]
@@ -238,11 +256,11 @@
               name: 'need_questions',
               radio: [
                 {
-                  value: true,
+                  value: 1,
                   label: 'Да'
                 },
                 {
-                  value: false,
+                  value: 0,
                   label: 'Нет'
                 }
               ]
@@ -259,11 +277,11 @@
               name: 'interview_training',
               radio: [
                 {
-                  value: true,
+                  value: 1,
                   label: 'Да'
                 },
                 {
-                  value: false,
+                  value: 0,
                   label: 'Нет'
                 }
               ]
@@ -280,11 +298,11 @@
               name: 'internship_training',
               radio: [
                 {
-                  value: true,
+                  value: 1,
                   label: 'Да'
                 },
                 {
-                  value: false,
+                  value: 0,
                   label: 'Нет'
                 }
               ]
@@ -310,6 +328,9 @@
       ...mapActions({
         PROJECT_LIST: 'project/PROJECT_LIST',
         PRODUCT_TYPE: 'productType/PRODUCT_TYPE'
+      }),
+      ...mapGetters({
+        getAddVacancyData: 'vacancy/getAddVacancyData'
       }),
       onNewProductType() {
         this.PRODUCT_TYPE()

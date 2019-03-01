@@ -12,12 +12,27 @@
       <span>{{item}}</span>
       <button class="btn-close" @click="deleteQuestion(index)"><i class="fa fa-close"></i></button>
     </div>
+    <div class="d-flex flex-wrap justify-content-end mt-4">
+      <div class="btn-group flex-wrap ml-auto mb-2">
+        <button type="button" class="btn btn-secondary" @click="$emit('prev')">Предыдущий шаг</button>
+        <button type="button" class="btn btn-secondary" :class="{disabled: !canSave}" @click="$emit('next')">Следующий шаг</button>
+      </div>
+      <button v-if="!canSave" class="btn btn-success ml-3" @click.prevent="$emit('send')">Сохранить</button>
+    </div>
   </div>
 </template>
 
 <script>
+  import {mapMutations, mapGetters} from 'vuex';
+
   export default {
     name: "AddVacancyFourth",
+    props: {
+      education: {
+        type: Boolean,
+        required: true
+      }
+    },
     data() {
       return {
         newQuestion: '',
@@ -28,13 +43,34 @@
         ]
       }
     },
+    computed: {
+      canSave() {
+        return !this.education;
+      }
+    },
     methods: {
+      ...mapMutations({
+        ADD_DATA_VACANCY: 'vacancy/ADD_DATA_VACANCY'
+      }),
+      ...mapGetters({
+        getAddVacancyData: 'vacancy/getAddVacancyData'
+      }),
       deleteQuestion(index) {
         this.questions.splice(index, 1);
+        this.ADD_DATA_VACANCY({questions: this.questions});
       },
       addQuestion() {
         this.questions.push(this.newQuestion);
         this.newQuestion = '';
+        this.ADD_DATA_VACANCY({questions: this.questions});
+      }
+    },
+    created() {
+      if (this.getAddVacancyData().hasOwnProperty('questions')) {
+        this.questions = this.getAddVacancyData().questions;
+      }
+      else {
+        this.ADD_DATA_VACANCY({questions: this.questions});
       }
     }
   }

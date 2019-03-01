@@ -18,7 +18,7 @@
       </component>
 
       <div class="col-12 d-flex">
-        <div class="btn-group ml-auto">
+        <div class="btn-group flex-wrap ml-auto mb-2">
           <button type="button" class="btn btn-secondary" @click="$emit('prev')">Предыдущий шаг</button>
           <button type="button" class="btn btn-secondary" @click="validateBeforeSubmit">Следующий шаг</button>
         </div>
@@ -32,8 +32,7 @@
   import InputText from "../inputs/InputText";
   import InputSelect from "../inputs/InputSelect";
   import InputRadio from "../inputs/InputRadio";
-  import {mapMutations} from 'vuex';
-  import InputAdd from "../inputs/InputAdd";
+  import {mapMutations, mapGetters} from 'vuex';
   import InputTextarea from "../inputs/InputTextarea";
   import addVacancyMixin from "../../mixins/addVacancyMixin"
   import ModalAddNetwork from "./ModalAddNetwork";
@@ -41,7 +40,7 @@
 
   export default {
     name: "AddVacancySecond",
-    components: {ModalAddNetwork, InputDropdown, InputTextarea, InputAdd, InputRadio, InputSelect, InputText},
+    components: {ModalAddNetwork, InputDropdown, InputTextarea, InputRadio, InputSelect, InputText},
     data() {
       return {
         inputs: [
@@ -189,6 +188,9 @@
       ...mapMutations({
         ADD_DATA_VACANCY: 'vacancy/ADD_DATA_VACANCY'
       }),
+      ...mapGetters({
+        getAddVacancyData: 'vacancy/getAddVacancyData'
+      })
     },
     mixins: [addVacancyMixin]
   }

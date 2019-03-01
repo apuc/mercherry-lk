@@ -9,6 +9,7 @@
                 @input="updateValue"
                 @blur="$emit('blur')"
                 :value="value"
+                v-model="selected"
         >
           <option v-for="option in data.options"
                   :value="option.id"
@@ -29,23 +30,14 @@
   export default {
     name: "InputSelect",
     mixins: [inputMixin],
-    methods: {
-      firstValue() {
-        if (this.data.done) {
-          this.$emit('input', this.data.options[0].id);
-          this.data.done = false;
-        }
-      },
-      updateValue(e) {
-        this.$emit("input", e.target.value);
+    data() {
+      return {
+        selected: ''
       }
     },
-    beforeUpdate() {
-      this.firstValue();
-    },
     created() {
-      this.firstValue();
-    },
+      this.selected = this.value;
+    }
   }
 </script>
 

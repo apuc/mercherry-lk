@@ -12,6 +12,7 @@
                    @onInput="onInputUpdate"
                    @next="next()"
                    @prev="prev()"
+                   @send="send()"
                    :profile="dataTabs.tabs[3].disabled"
                    :education="dataTabs.tabs[4].disabled"
         />
@@ -29,7 +30,7 @@
   import AddVacancyThird from "../../components/addVacancy/AddVacancyThird";
   import AddVacancyFourth from "../../components/addVacancy/AddVacancyFourth";
   import AddVacancyFifth from "../../components/addVacancy/AddVacancyFifth";
-  import {mapGetters} from 'vuex';
+  import {mapGetters, mapActions, mapMutations} from 'vuex';
 
   export default {
     name: "AddVacancy",
@@ -109,14 +110,20 @@
       })
     },
     methods: {
+      ...mapActions({
+        ADD_VACANCY: 'vacancy/ADD_VACANCY'
+      }),
+      ...mapMutations({
+        VACANCY_ERROR: 'vacancy/VACANCY_ERROR'
+      }),
       onInputUpdate() {
-        if (this.getAddVacancyData.need_questions === "true") {
+        if (this.getAddVacancyData.need_questions == 1) {
           this.dataTabs.tabs[3].disabled = false;
         }
         else {
           this.dataTabs.tabs[3].disabled = true;
         }
-        if (this.getAddVacancyData.interview_training === "true" || this.getAddVacancyData.internship_training === "true") {
+        if (this.getAddVacancyData.interview_training == 1 || this.getAddVacancyData.internship_training == 1) {
           this.dataTabs.tabs[4].disabled = false
         }
         else {
@@ -166,6 +173,17 @@
           }
         }
         window.scrollTo(0, 0);
+      },
+      send() {
+        this.ADD_VACANCY(this.getAddVacancyData)
+          .then(res => {
+            if (res.ok) {
+              this.$router.push({name: 'vacancies'});
+            }
+            else {
+              this.VACANCY_ERROR(res.body.error);
+            }
+          });
       }
     },
     beforeUpdate() {

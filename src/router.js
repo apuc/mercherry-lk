@@ -24,17 +24,17 @@ export default new Router({
     },
     {
       path: '/projects',
-      name: 'adminProjects',
+      name: 'projects',
       component: AdminProjects
     },
     {
       path: '/vacancies',
-      name: 'adminVacancies',
+      name: 'vacancies',
       component: AdminVacancies
     },
     {
       path: '/resume',
-      name: 'adminResume',
+      name: 'resume',
       component: AdminResume
     },
     {

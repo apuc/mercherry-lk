@@ -82,6 +82,9 @@
   .v-select .vs__actions {
     display: none !important;
   }
+  .dropdown.single .vs__selected-options {
+    padding: 0 1.175rem !important;
+  }
   .dropdown-toggle::after {
     display: none;
   }

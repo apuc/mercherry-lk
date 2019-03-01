@@ -17,12 +17,12 @@
           :index="index"
       >
       </component>
-      <div class="col-12 d-flex">
-        <div class="btn-group ml-auto">
+      <div class="col-12 d-flex flex-wrap justify-content-end">
+        <div class="btn-group flex-wrap ml-auto mb-2">
           <button type="button" class="btn btn-secondary" @click="$emit('prev')">Предыдущий шаг</button>
           <button type="button" class="btn btn-secondary" :class="{disabled: !canSave}" @click="validateBeforeSubmit">Следующий шаг</button>
         </div>
-        <button v-if="!canSave" class="btn btn-success ml-3">Сохранить</button>
+        <button v-if="!canSave" class="btn btn-success ml-3" @click.prevent="$emit('send')">Сохранить</button>
       </div>
     </div>
   </form>
@@ -30,7 +30,7 @@
 <script>
   import InputSelect from "../inputs/InputSelect";
   import InputRadio from "../inputs/InputRadio";
-  import {mapMutations} from 'vuex';
+  import {mapMutations, mapGetters} from 'vuex';
   import addVacancyMixin from "../../mixins/addVacancyMixin"
 
   export default {
@@ -92,13 +92,14 @@
             data: {
               label: 'Есть ли повторное собеседование',
               name: 'interviewing_repeat',
+              addFieldValue: [1],
               radio: [
                 {
-                  value: true,
+                  value: 1,
                   label: 'Да'
                 },
                 {
-                  value: false,
+                  value: 0,
                   label: 'Нет'
                 }
               ],
@@ -157,6 +158,9 @@
     methods: {
       ...mapMutations({
         ADD_DATA_VACANCY: 'vacancy/ADD_DATA_VACANCY'
+      }),
+      ...mapGetters({
+        getAddVacancyData: 'vacancy/getAddVacancyData'
       }),
     },
     computed: {

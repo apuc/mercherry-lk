@@ -1,3 +1,4 @@
 export default {
-  'getAddVacancyData': state => state.data
+  'getAddVacancyData': state => state.data,
+  'getVacancyError': state => state.errors
 };

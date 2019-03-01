@@ -48,8 +48,10 @@ const addVacancyMixin = {
       this.inputs.splice(index, 1);
     }
   },
-  mounted() {
-
+  created() {
+    for (let key in this.getAddVacancyData()) {
+      this.value[key] = this.getAddVacancyData()[key];
+    }
   }
 };
 
