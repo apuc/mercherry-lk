@@ -2,8 +2,9 @@
   <ul class="nav nav-tabs">
     <li v-for="item in dataTabs.tabs"
         class="nav-item"
+        :style="width"
     >
-      <button v-if="dataTabs.click"
+      <button v-if="item.done"
               class="nav-link"
               :class="{active: item.name === dataTabs.currentTab, disabled: item.disabled, 'nav-link-success': item.done}"
               @click="tabClick(item.name)"
@@ -33,34 +34,47 @@
       tabClick(name) {
         this.$emit('tabClick', name);
       }
+    },
+    computed: {
+      width() {
+        return 'width: ' + 100 / this.dataTabs.tabs.length + '%';
+      }
     }
   }
 </script>
 
 <style lang="scss">
   .nav-tabs {
-    border-bottom: 1px solid #ebedf2;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    border-bottom: none;
+    .nav-item {
+      @media(max-width: 992px) {
+        width: unset !important;
+      }
+    }
     .nav-link {
-      background: #f6f8fa;
-      color: #000000;
+      width: calc(100% - 1rem);
+      margin: 0 0.5em 0.5em;
+      padding: 1em 1em;
+      border-radius: 5px;
       font-size: 0.875rem;
-      line-height: 1.8;
-      border-radius: 0;
-      border: 1px solid #f3f3f3;
-      padding: .75rem 1.5rem;
+      font-weight: 600;
+      text-align: center;
+      color: #434a54;
+      background: #e6e9ed;
+      border: none;
+      white-space: nowrap;
       &:hover {
         border-color: #f3f3f3;
       }
       &.active {
-        color: #222222;
-        border-color: #ebedf2 #ebedf2 #ffffff;
+        background: #7571f9;
+        color: #ffffff;
       }
       &-success {
-        margin-bottom: -2px;
-        border-bottom: 3px solid #6fd96f;
-        &:hover {
-          border-bottom: 3px solid #6fd96f;
-        }
+        background: #d4d3fd;
+        color: #ffffff;
       }
     }
   }

@@ -4,7 +4,14 @@
     <main class="main">
       <div class="admin-wrap">
         <AdminMenu/>
-        <slot/>
+        <div class="admin-content">
+          <div class="card container p-0">
+            <div class="card-body">
+              <h4 class="card-title">{{$route.meta.title}}</h4>
+              <slot/>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </div>
@@ -15,7 +22,7 @@
   import AdminMenu from "../../components/admin/AdminMenu";
   export default {
     name: "MainLayout",
-    components: {AdminMenu, Header}
+    components: {AdminMenu, Header},
   }
 </script>
 

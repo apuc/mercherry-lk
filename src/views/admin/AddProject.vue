@@ -1,44 +1,39 @@
 <template>
-  <div class="admin-content">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Новый проект</h4>
-        <div class="alert alert-success">
-          Используйте в названии и описании проекта только понятные обозначения, так как оно будет отображаться для всех пользователей.
-        </div>
-        <form  class="forms-sample">
-          <div class="form-group">
-            <label for="label">Название</label>
-            <input type="text"
-                   class="form-control"
-                   id="label"
-                   v-model="data.label"
-                   name="label"
-                   v-validate="'required'"
-            >
-            <p class="text-danger">{{errors.first('label')}}</p>
-          </div>
-          <div class="form-group">
-            <label for="text">Описание</label>
-            <textarea class="form-control" id="text" rows="4" v-model="data.text"></textarea>
-          </div>
-          <div class="form-group" v-for="item in files">
-            <label class="d-inline-block mr-2">{{item.label}}</label>
-            <div class="fileuploader">Upload</div>
-          </div>
-          <div class="form-group">
-            <label for="link">Сслыка на сайт</label>
-            <input type="text"
-                   class="form-control"
-                   id="link"
-                   v-model="data.url"
-            >
-          </div>
-          <button class="btn btn-success" @click.prevent="validateBeforeSubmit">Сохранить</button>
-          <p v-if="success">Проект добавлен</p>
-        </form>
-      </div>
+  <div>
+    <div class="alert alert-success">
+      Используйте в названии и описании проекта только понятные обозначения, так как оно будет отображаться для всех пользователей.
     </div>
+    <form  class="forms-sample">
+      <div class="form-group">
+        <label for="label">Название</label>
+        <input type="text"
+               class="form-control"
+               id="label"
+               v-model="data.label"
+               name="label"
+               v-validate="'required'"
+        >
+        <p class="text-danger">{{errors.first('label')}}</p>
+      </div>
+      <div class="form-group">
+        <label for="text">Описание</label>
+        <textarea class="form-control" id="text" rows="4" v-model="data.text"></textarea>
+      </div>
+      <div class="form-group" v-for="item in files">
+        <label class="d-inline-block mr-2">{{item.label}}</label>
+        <div class="fileuploader">Upload</div>
+      </div>
+      <div class="form-group">
+        <label for="link">Сслыка на сайт</label>
+        <input type="text"
+               class="form-control"
+               id="link"
+               v-model="data.url"
+        >
+      </div>
+      <button class="btn btn-success" @click.prevent="validateBeforeSubmit">Сохранить</button>
+      <p v-if="success">Проект добавлен</p>
+    </form>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row mt-4">
-    <p class="mb-3 mb-sm-0">Showing 1 to 20 of 20 entries</p>
+    <p class="mb-3 mb-sm-0">Показана {{currentPage}} страница из {{totalPages}}</p>
     <nav>
       <ul class="pagination pagination-primary">
         <li class="page-item prev">
@@ -39,6 +39,10 @@
       pages: {
         type: Array,
         required: false
+      },
+      totalPages: {
+        type: Number,
+        required: true
       }
     },
     computed: {

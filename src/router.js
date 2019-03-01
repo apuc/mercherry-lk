@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import AdminProjects from "./views/admin/AdminProjects";
-import AdminVacancies from "./views/admin/AdminVacancies";
-import AdminResume from "./views/admin/AdminResume";
+import Projects from "./views/admin/Projects";
+import Vacancies from "./views/admin/Vacancies";
+import Resume from "./views/admin/Resume";
 import Login from "./views/Login";
 import Password from "./views/Password";
 import AddProject from "./views/admin/AddProject";
@@ -25,17 +25,20 @@ export default new Router({
     {
       path: '/projects',
       name: 'projects',
-      component: AdminProjects
+      meta: {title: 'Проекты'},
+      component: Projects
     },
     {
       path: '/vacancies',
       name: 'vacancies',
-      component: AdminVacancies
+      meta: {title: 'Вакансии'},
+      component: Vacancies
     },
     {
       path: '/resume',
       name: 'resume',
-      component: AdminResume
+      meta: {title: 'Список резюме'},
+      component: Resume
     },
     {
       path: '/login',
@@ -52,11 +55,13 @@ export default new Router({
     {
       path: '/project/add',
       name: 'add-project',
+      meta: {title: 'Добавить проект'},
       component: AddProject
     },
     {
       path: '/vacancy/add',
       name: 'add-vacancy',
+      meta: {title: 'Добавить вакансию'},
       component: AddVacancy
     }
   ]

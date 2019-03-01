@@ -1,23 +1,18 @@
 <template>
-  <div class="admin-content">
-    <div class="card container p-0">
-      <div class="card-body">
-        <Breadcrumbs :items="breadcrumbs"/>
-        <h4 class="card-title">{{mainTitle}}</h4>
-        <Tabs :dataTabs="dataTabs"
-              @tabClick="onTabClick"
-        />
-        <component :is="`AddVacancy${dataTabs.currentTab}`"
-                   class="mt-4"
-                   @onInput="onInputUpdate"
-                   @next="next()"
-                   @prev="prev()"
-                   @send="send()"
-                   :profile="dataTabs.tabs[3].disabled"
-                   :education="dataTabs.tabs[4].disabled"
-        />
-      </div>
-    </div>
+  <div>
+    <!--<Breadcrumbs :items="breadcrumbs"/>-->
+    <Tabs :dataTabs="dataTabs"
+          @tabClick="onTabClick"
+    />
+    <component :is="`AddVacancy${dataTabs.currentTab}`"
+               class="mt-4"
+               @onInput="onInputUpdate"
+               @next="next()"
+               @prev="prev()"
+               @send="send()"
+               :profile="dataTabs.tabs[3].disabled"
+               :education="dataTabs.tabs[4].disabled"
+    />
   </div>
 </template>
 
@@ -49,12 +44,11 @@
             href: 'vacancy'
           },
           {
-            name: ''
+            name: 'Новая вакансия'
           }
         ],
         dataTabs: {
           currentTab: '',
-          click: false,
           tabs: [
             {
               name: 'First',
@@ -101,7 +95,6 @@
             }
           }
         },
-        mainTitle: ''
       }
     },
     computed: {
@@ -128,30 +121,6 @@
         }
         else {
           this.dataTabs.tabs[4].disabled = true;
-        }
-      },
-      title() {
-        switch(this.dataTabs.currentTab) {
-          case 'First':
-            this.breadcrumbs[this.breadcrumbs.length - 1].name = 'Новая вакансия';
-            this.mainTitle = 'Новая вакансия';
-            break;
-          case 'Second':
-            this.breadcrumbs[this.breadcrumbs.length - 1].name = 'Редактирование';
-            this.mainTitle = 'Редактирование вакансии';
-            break;
-          case 'Third':
-            this.breadcrumbs[this.breadcrumbs.length - 1].name = 'Редактирование';
-            this.mainTitle = 'Редактирование вакансии';
-            break;
-          case 'Fourth':
-            this.breadcrumbs[this.breadcrumbs.length - 1].name = 'Редактирование';
-            this.mainTitle = 'Редактирование вакансии';
-            break;
-          case 'Fifth':
-            this.breadcrumbs[this.breadcrumbs.length - 1].name = 'Редактирование';
-            this.mainTitle = 'Редактирование вакансии';
-            break;
         }
       },
       next() {
@@ -185,12 +154,6 @@
             }
           });
       }
-    },
-    beforeUpdate() {
-      this.title();
-    },
-    created() {
-      this.title();
     },
     mixins: [tabsMixin]
   }
