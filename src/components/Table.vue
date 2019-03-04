@@ -26,9 +26,9 @@
               <button class="btn-ico">
                 <i class="fa fa-eye"></i>
               </button>
-              <button v-if="editBtn" class="btn-ico">
+              <router-link v-if="editBtn" class="btn-ico" :to="`/${name}/update/${item.id}`">
                 <i class="fa fa-pencil"></i>
-              </button>
+              </router-link>
               <button v-if="deleteBtn" class="btn-ico" @click="deleteElem(item.id)">
                 <i class="fa fa-close"></i>
               </button>

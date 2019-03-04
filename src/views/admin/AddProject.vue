@@ -4,69 +4,96 @@
       Используйте в названии и описании проекта только понятные обозначения, так как оно будет отображаться для всех пользователей.
     </div>
     <form  class="forms-sample">
-      <div class="form-group">
-        <label for="label">Название</label>
-        <input type="text"
-               class="form-control"
-               id="label"
-               v-model="data.label"
-               name="label"
-               v-validate="'required'"
+      <div class="row">
+        <component
+            v-for="input in inputs"
+            :is="input.component"
+            :class="input.className"
+            :key="input.data.name"
+            :data="input.data"
+            v-validate="input.rules"
+            :name="input.data.name"
+            v-model="value[input.data.name]"
+            :error="errors.first(input.data.name)"
         >
-        <p class="text-danger">{{errors.first('label')}}</p>
-      </div>
-      <div class="form-group">
-        <label for="text">Описание</label>
-        <textarea class="form-control" id="text" rows="4" v-model="data.text"></textarea>
-      </div>
-      <div class="form-group" v-for="item in files">
-        <label class="d-inline-block mr-2">{{item.label}}</label>
-        <div class="fileuploader">Upload</div>
-      </div>
-      <div class="form-group">
-        <label for="link">Сслыка на сайт</label>
-        <input type="text"
-               class="form-control"
-               id="link"
-               v-model="data.url"
-        >
+        </component>
       </div>
       <button class="btn btn-success" @click.prevent="validateBeforeSubmit">Сохранить</button>
-      <p v-if="success">Проект добавлен</p>
     </form>
   </div>
 </template>
 
 <script>
   import {mapActions} from 'vuex';
+  import InputText from "../../components/inputs/InputText";
+  import InputTextarea from "../../components/inputs/InputTextarea";
+  import InputUpload from "../../components/inputs/InputUpload";
 
   export default {
     name: "AddProject",
+    components: {InputUpload, InputTextarea, InputText},
     data() {
       return {
-        files: [
+        value: {},
+        inputs: [
           {
-            label: 'Изображение',
-            name: 'image_id'
+            component: 'InputText',
+            className: 'col-12',
+            rules: {
+              required: true
+            },
+            data: {
+              id: 'label',
+              label: 'Название',
+              name: 'label',
+            }
           },
           {
-            label: 'Видео',
-            name: 'video_id'
+            component: 'InputTextarea',
+            className: 'col-12',
+            data: {
+              id: 'text',
+              label: 'Описание',
+              name: 'text',
+            }
           },
           {
-            label: 'Презентация',
-            name: 'presentation_id'
-          }
+            component: 'InputUpload',
+            className: 'col-12',
+            data: {
+              id: 'image_id',
+              name: 'image_id',
+              label: 'Изображение'
+            }
+          },
+          {
+            component: 'InputUpload',
+            className: 'col-12',
+            data: {
+              id: 'video_id',
+              name: 'video_id',
+              label: 'Видео'
+            }
+          },
+          {
+            component: 'InputUpload',
+            className: 'col-12',
+            data: {
+              id: 'presentation_id',
+              name: 'presentation_id',
+              label: 'Презентация'
+            }
+          },
+          {
+            component: 'InputText',
+            className: 'col-12',
+            data: {
+              id: 'url',
+              label: 'Ссылка на сайт',
+              name: 'url',
+            }
+          },
         ],
-        data: {
-          label: '',
-          text: '',
-          image_id: '',
-          video_id: '',
-          presentation_id: '',
-          url: ''
-        },
-        success: false
       }
     },
     methods: {
@@ -76,39 +103,16 @@
       validateBeforeSubmit() {
         this.$validator.validateAll().then((result) => {
           if (result) {
-            this.ADD_PROJECT(this.data)
+            this.ADD_PROJECT(this.value)
               .then(res => {
                 if (res.ok) {
-
+                  this.$router.push({name: 'projects'});
                 }
-                else {
-
-                }
-                console.log(res)
               });
           }
         });
       },
     },
-    mounted() {
-      setTimeout(function() {
-        $(document).ready(function() {
-          if ($(".fileuploader").length) {
-            $(".fileuploader").each(function(index, value) {
-              $(value).uploadFile({
-                autoSubmit: false,
-                fileName: "myfile",
-                onSelect:function(files)
-                {
-                  const name = this.files[index].name;
-                  this.data[name] = files[0];
-                }
-              });
-            });
-          }
-        });
-      }, 100)
-    }
   }
 </script>
 

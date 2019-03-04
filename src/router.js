@@ -49,6 +49,18 @@ export default new Router({
       ]
     },
     {
+      path: '/vacancy/add',
+      name: 'add-vacancy',
+      meta: {title: 'Добавить вакансию', action: 'ADD'},
+      component: AddVacancy
+    },
+    {
+      path: '/vacancy/update/:id',
+      name: 'update-vacancy',
+      meta: {title: 'Редактирование вакансии: ', action: 'UPDATE', id: true},
+      component: AddVacancy
+    },
+    {
       path: '/resume',
       name: 'resume',
       meta: {title: 'Список резюме'},
@@ -71,12 +83,6 @@ export default new Router({
       name: 'add-project',
       meta: {title: 'Добавить проект'},
       component: AddProject
-    },
-    {
-      path: '/vacancy/add',
-      name: 'add-vacancy',
-      meta: {title: 'Добавить вакансию'},
-      component: AddVacancy
     },
     {
       path: '/responses/:id',

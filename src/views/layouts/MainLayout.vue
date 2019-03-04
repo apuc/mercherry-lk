@@ -7,7 +7,10 @@
         <div class="admin-content">
           <div class="card container p-0">
             <div class="card-body">
-              <h4 class="card-title">{{$route.meta.title}}</h4>
+              <h4 class="card-title">
+                {{$route.meta.title}}
+                <template v-if="$route.meta.id">{{$route.params.id}}</template>
+              </h4>
               <slot/>
             </div>
           </div>

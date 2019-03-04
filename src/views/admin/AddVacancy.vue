@@ -34,6 +34,7 @@
       AddVacancyFourth, AddVacancyThird, AddVacancySecond, AddVacancyFifth, Tabs, Breadcrumbs},
     data() {
       return {
+        getData: true,
         breadcrumbs: [
           {
             name: 'Главная',
@@ -104,10 +105,12 @@
     },
     methods: {
       ...mapActions({
-        ADD_VACANCY: 'vacancy/ADD_VACANCY'
+        ADD_VACANCY: 'vacancy/ADD_VACANCY',
+        VACANCY: 'vacancy/VACANCY'
       }),
       ...mapMutations({
-        VACANCY_ERROR: 'vacancy/VACANCY_ERROR'
+        VACANCY_ERROR: 'vacancy/VACANCY_ERROR',
+        ADD_DATA_VACANCY: 'vacancy/ADD_DATA_VACANCY'
       }),
       onInputUpdate() {
         if (this.getAddVacancyData.need_questions == 1) {
@@ -144,7 +147,17 @@
         window.scrollTo(0, 0);
       },
       send() {
-        this.ADD_VACANCY(this.getAddVacancyData)
+        let dataSend = {};
+        if (this.$route.meta.action === 'UPDATE') {
+          dataSend = {
+            id: this.$route.params.id,
+            data: this.getAddVacancyData
+          }
+        }
+        else {
+          dataSend = this.getAddVacancyData;
+        }
+        this[`${this.$route.meta.action}_VACANCY`](dataSend)
           .then(res => {
             if (res.ok) {
               this.$router.push({name: 'vacancies'});
@@ -152,6 +165,14 @@
             else {
               this.VACANCY_ERROR(res.body.error);
             }
+          });
+      }
+    },
+    created() {
+      if (this.$route.meta.action === 'UPDATE') {
+        this.VACANCY(this.$route.params.id)
+          .then(res => {
+            this.ADD_DATA_VACANCY(res.body);
           });
       }
     },
