@@ -7,14 +7,16 @@ import Login from "./views/Login";
 import Password from "./views/Password";
 import AddProject from "./views/admin/AddProject";
 import AddVacancy from "./views/admin/AddVacancy";
+import Responses from "./views/admin/Responses";
+import Pagination from "./components/Pagination";
 
 Vue.use(Router);
 
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  scrollBehavior (to, from, savedPosition) {
-    return { x: 0, y: 0 }
+  scrollBehavior(to, from, savedPosition) {
+    return {x: 0, y: 0}
   },
   routes: [
     {
@@ -26,13 +28,25 @@ export default new Router({
       path: '/projects',
       name: 'projects',
       meta: {title: 'Проекты'},
-      component: Projects
+      component: Projects,
+      children: [
+        {
+          path: 'page/:page',
+          meta: {title: 'Проекты'},
+        }
+      ]
     },
     {
       path: '/vacancies',
       name: 'vacancies',
       meta: {title: 'Вакансии'},
-      component: Vacancies
+      component: Vacancies,
+      children: [
+        {
+          path: 'page/:page',
+          meta: {title: 'Вакансии'}
+        }
+      ]
     },
     {
       path: '/resume',
@@ -63,6 +77,12 @@ export default new Router({
       name: 'add-vacancy',
       meta: {title: 'Добавить вакансию'},
       component: AddVacancy
+    },
+    {
+      path: '/responses/:id',
+      name: 'responses',
+      meta: {title: 'Отклики'},
+      component: Responses
     }
   ]
 })

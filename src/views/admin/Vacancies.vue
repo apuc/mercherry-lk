@@ -6,12 +6,30 @@
       </i>
       <span>Добавить вакансию</span>
     </router-link>
+    <Table :head="head"
+           :name="name"
+           :nameLink="nameLink"
+    />
   </div>
 </template>
 
 <script>
+  import Table from "../../components/Table";
   export default {
-    name: "AdminVacancies"
+    name: "AdminVacancies",
+    components: {Table},
+    data() {
+      return {
+        head: [
+          'Название',
+          'Тип продукта',
+          'Тип вакансии',
+          'Статус'
+        ],
+        name: 'vacancy',
+        nameLink: true,
+      }
+    },
   }
 </script>
 

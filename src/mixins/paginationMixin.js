@@ -36,6 +36,9 @@ const paginationMixin = {
       }
     },
   },
+  beforeUpdate() {
+    this.currentPages();
+  },
   created() {
     this.currentPages();
   },

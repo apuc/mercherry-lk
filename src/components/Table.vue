@@ -5,7 +5,7 @@
         <thead>
         <tr>
           <th class="table-id">ID</th>
-          <th v-for="(item, index) in head">
+          <th v-for="item in head">
             {{item}}
           </th>
           <th class="table-buttons"></th>
@@ -13,18 +13,23 @@
         </thead>
         <tbody>
         <tr v-for="item in data">
-          <td v-for="label in item">
-            {{label}}
+          <td v-for="(label, key, index) in item">
+            <router-link class="table-name-link" v-if="nameLink && index == 1" :to="`/responses/${item.id}`">
+              {{label}}
+            </router-link>
+            <template v-else>
+              {{label}}
+            </template>
           </td>
           <td>
             <div class="btn-icons justify-content-end">
               <button class="btn-ico">
                 <i class="fa fa-eye"></i>
               </button>
-              <button class="btn-ico">
+              <button v-if="editBtn" class="btn-ico">
                 <i class="fa fa-pencil"></i>
               </button>
-              <button class="btn-ico" @click="deleteElem(item.id)">
+              <button v-if="deleteBtn" class="btn-ico" @click="deleteElem(item.id)">
                 <i class="fa fa-close"></i>
               </button>
             </div>
@@ -33,9 +38,11 @@
         </tbody>
       </table>
     </div>
-    <Pagination :currentPage="currentPage"
+    <Pagination v-if="pages.length > 0"
+                :currentPage="currentPage"
                 :pages="pages"
                 :totalPages="totalPages"
+                :path="path"
     />
   </div>
 </template>
@@ -50,7 +57,8 @@
     components: {Pagination},
     data() {
       return {
-        data: []
+        data: [],
+        path: ''
       }
     },
     props: {
@@ -61,6 +69,23 @@
       name: {
         type: String,
         required: true
+      },
+      nameLink: {
+        type: Boolean
+      },
+      idRequired: {
+        type: Boolean
+      },
+      idName: {
+        type: String
+      },
+      deleteBtn: {
+        type: Boolean,
+        default: true
+      },
+      editBtn: {
+        type: Boolean,
+        default: true
       }
     },
     methods: {
@@ -78,21 +103,46 @@
         }
       },
       getElem() {
-        store.dispatch(`${this.name}/${this.name.toUpperCase()}_LIST`, {currentPage: this.currentPage})
+        let dataSend = {page: this.currentPage};
+        if (this.idRequired) {
+          dataSend[this.idName] = this.$route.params.id;
+        }
+        store.dispatch(`${this.name}/${this.name.toUpperCase()}_LIST`, dataSend)
           .then(res => {
             this.data = res.body.result;
+            for (let value of this.data) {
+              if (value.hasOwnProperty('created')) {
+                let date = new Date(value.created * 1000)
+                value.created = date.toLocaleDateString();
+              }
+            }
             this.totalPages = res.body.totalPages;
             this.currentPage = res.body.currentPage;
           });
+      },
+      getPath() {
+        this.path = this.$route.path;
+        if (this.$route.params.page !== undefined) {
+          this.currentPage = parseInt(this.$route.params.page);
+        }
+        if (this.path.indexOf('/page') !== -1) {
+          this.path = this.path.slice(0, this.path.indexOf('/page'));
+        }
+        this.getElem();
       }
     },
     created() {
-      this.getElem();
+      this.getPath();
+    },
+    beforeUpdate() {
+      this.getPath();
     },
     mixins: [paginationMixin]
   }
 </script>
 
-<style scoped>
-
+<style>
+  .table-name-link {
+    color: inherit;
+  }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row mt-4">
     <p class="mb-3 mb-sm-0">Показана {{currentPage}} страница из {{totalPages}}</p>
-    <nav>
+    <nav v-if="totalPages > 1">
       <ul class="pagination pagination-primary">
         <li class="page-item prev">
-          <router-link v-if="currentPage != 1" class="page-link" to="#">
+          <router-link v-if="currentPage != 1" class="page-link" :to="`${path}/page/${prevPage}`">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
           </router-link>
           <span v-else class="page-link disabled">
@@ -12,10 +12,10 @@
       </span>
         </li>
         <li class="page-item" :class="page == currentPage ? 'active' : ''" v-for="page in pages" :key="page">
-          <router-link class="page-link" to="#">{{page}}</router-link>
+          <router-link class="page-link" :to="`${path}/page/${page}`">{{page}}</router-link>
         </li>
         <li>
-          <router-link v-if="currentPage != pages.length" class="page-link" to="#">
+          <router-link v-if="currentPage != pages.length" class="page-link" :to="`${path}/page/${nextPage}`">
             <i class="fa fa-angle-right" aria-hidden="true"></i>
           </router-link>
           <span v-else class="page-link disabled">
@@ -42,6 +42,10 @@
       },
       totalPages: {
         type: Number,
+        required: true
+      },
+      path: {
+        type: String,
         required: true
       }
     },

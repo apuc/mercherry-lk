@@ -26,7 +26,7 @@
         ],
         name: 'project',
       }
-    },
+    }
   }
 </script>
 
