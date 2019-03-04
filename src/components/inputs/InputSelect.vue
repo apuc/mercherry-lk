@@ -35,8 +35,22 @@
         selected: ''
       }
     },
+    methods: {
+      setSelected() {
+        if (this.value !== '') {
+          this.selected = this.value;
+        }
+        else if (this.data.options[0] !== undefined) {
+          this.selected = this.data.options[0].id;
+          this.updateValue({target: {value: this.selected}});
+        }
+      }
+    },
     created() {
-      this.selected = this.value;
+      this.setSelected();
+    },
+    beforeUpdate() {
+      this.setSelected();
     }
   }
 </script>

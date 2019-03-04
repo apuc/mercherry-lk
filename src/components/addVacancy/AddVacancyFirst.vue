@@ -66,6 +66,7 @@
               id: 'label',
               label: 'Название вакансии (это будет видно мерчендайзерам)',
               name: 'label',
+              placeholder: 'Название вакансии'
             }
           },
           {
@@ -316,6 +317,7 @@
               id: 'duration_internship',
               label: 'Длительность стажировки (дней)',
               name: 'duration_internship',
+              placeholder: 'Длительность стажировки'
             }
           },
         ],

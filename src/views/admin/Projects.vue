@@ -46,29 +46,6 @@
     }
   }
 
-  .btn {
-    &-icons {
-      display: flex;
-    }
-    &-ico {
-      min-width: 29px;
-      max-width: 29px;
-      min-height: 29px;
-      max-height: 29px;
-      font-size: 14px;
-      color: #93a2dd;
-      font-weight: 600;
-      text-transform: uppercase;
-      background-color: transparent;
-      border: none;
-      border-radius: 50%;
-      transition: all 0.3s;
-      &:hover {
-        color: #5d78ff;
-        background: #f0f3ff;
-      }
-    }
-  }
   .card {
     border-radius: 0.625rem;
     border: none;

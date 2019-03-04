@@ -33,6 +33,31 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+  .btn {
+    &-icons {
+      display: flex;
+    }
+    &-ico {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 29px;
+      max-width: 29px;
+      min-height: 29px;
+      max-height: 29px;
+      font-size: 14px;
+      color: #93a2dd;
+      font-weight: 600;
+      text-transform: uppercase;
+      background-color: transparent;
+      border: none;
+      border-radius: 50%;
+      transition: all 0.3s;
+      &:hover {
+        color: #5d78ff;
+        background: #f0f3ff;
+      }
+    }
+  }
 </style>
