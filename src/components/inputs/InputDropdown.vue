@@ -12,6 +12,7 @@
                   :value="value"
                   @input="updateValue"
                   @blur="$emit('blur')"
+                  :placeholder="data.placeholder || data.label"
         >
         </v-select>
 
@@ -82,10 +83,19 @@
   .v-select .vs__actions {
     display: none !important;
   }
+  .dropdown input {
+    padding: 0 1.475rem !important;
+  }
+  .dropdown.single input {
+    padding: 0 0.3rem !important;
+  }
   .dropdown.single .vs__selected-options {
     padding: 0 1.175rem !important;
   }
   .dropdown-toggle::after {
     display: none;
+  }
+  .v-select input {
+    margin-top: 0 !important;
   }
 </style>

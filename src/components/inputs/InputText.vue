@@ -9,7 +9,7 @@
              @input="updateValue"
              @blur="$emit('blur')"
              :value="value"
-             :placeholder="data.placeholder"
+             :placeholder="data.placeholder || data.label"
       >
       <p v-if="error !== undefined" class="text-danger">{{error}}</p>
     </div>

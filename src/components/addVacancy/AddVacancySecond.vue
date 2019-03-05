@@ -53,7 +53,8 @@
             data: {
               id: 'city',
               label: 'Город',
-              name: 'city'
+              name: 'city',
+              placeholder: 'Город'
             }
           },
           {
@@ -65,7 +66,8 @@
               name: 'district',
               params: [
                 'city'
-              ]
+              ],
+              placeholder: 'Район города'
             }
           },
           {
