@@ -278,6 +278,7 @@ fieldset:disabled a {
     color: #fff;
     background-color: #7571f9;
     border-color: #7571f9;
+    box-shadow: 0 2px 2px 0 rgba(117, 113, 249, 0.14), 0 3px 1px -2px rgba(117, 113, 249, 0.2), 0 1px 5px 0 rgba(117, 113, 249, 0.12);
 }
 
 .btn-primary:hover, .wizard > .actions a:hover {
@@ -314,6 +315,7 @@ fieldset:disabled a {
     color: #212529;
     background-color: #d9dbdc;
     border-color: #d9dbdc;
+    box-shadow: 0 2px 2px 0 rgba(217, 219, 220, 0.14), 0 3px 1px -2px rgba(217, 219, 220, 0.2), 0 1px 5px 0 rgba(217, 219, 220, 0.12);
 }
 
 .btn-secondary:hover, .wizard > .actions .disabled a:hover {
@@ -350,6 +352,7 @@ fieldset:disabled a {
     color: #212529;
     background-color: #6fd96f;
     border-color: #6fd96f;
+    box-shadow: 0 2px 2px 0 rgba(111, 217, 111, 0.14), 0 3px 1px -2px rgba(111, 217, 111, 0.2), 0 1px 5px 0 rgba(111, 217, 111, 0.12);
 }
 
 .btn-success:hover {
@@ -384,6 +387,7 @@ fieldset:disabled a {
     color: #fff;
     background-color: #4d7cff;
     border-color: #4d7cff;
+    box-shadow: 0 2px 2px 0 rgba(77, 124, 255, 0.14), 0 3px 1px -2px rgba(77, 124, 255, 0.2), 0 1px 5px 0 rgba(77, 124, 255, 0.12);
 }
 
 .btn-info:hover {
@@ -418,6 +422,7 @@ fieldset:disabled a {
     color: #212529;
     background-color: #f29d56;
     border-color: #f29d56;
+    box-shadow: 0 2px 2px 0 rgba(242, 157, 86, 0.14), 0 3px 1px -2px rgba(242, 157, 86, 0.2), 0 1px 5px 0 rgba(242, 157, 86, 0.12);
 }
 
 .btn-warning:hover {
@@ -452,6 +457,7 @@ fieldset:disabled a {
     color: #fff;
     background-color: #ff5e5e;
     border-color: #ff5e5e;
+    box-shadow: 0 2px 2px 0 rgba(255, 94, 94, 0.14), 0 3px 1px -2px rgba(255, 94, 94, 0.2), 0 1px 5px 0 rgba(255, 94, 94, 0.12);
 }
 
 .btn-danger:hover {
@@ -486,6 +492,7 @@ fieldset:disabled a {
     color: #212529;
     background-color: #f8f9fa;
     border-color: #f8f9fa;
+    box-shadow: 0 2px 2px 0 rgba(248, 249, 250, 0.14), 0 3px 1px -2px rgba(248, 249, 250, 0.2), 0 1px 5px 0 rgba(248, 249, 250, 0.12);
 }
 
 .btn-light:hover {
@@ -526,6 +533,7 @@ fieldset:disabled a {
     color: #fff;
     background-color: #181d23;
     border-color: #13171c;
+    box-shadow: 0 2px 2px 0 rgba(40, 47, 58, 0.14), 0 3px 1px -2px rgba(40, 47, 58, 0.2), 0 1px 5px 0 rgba(40, 47, 58, 0.12);
 }
 
 .btn-dark:focus, .btn-dark.focus {

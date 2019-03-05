@@ -1,13 +1,7 @@
 const addVacancyMixin = {
   data() {
     return {
-      value: {},
-      setDataDone: false
-    }
-  },
-  props: {
-    getData: {
-      type: Boolean
+      value: {}
     }
   },
   methods: {
@@ -60,10 +54,7 @@ const addVacancyMixin = {
     }
   },
   beforeUpdate() {
-    if (this.getData && !this.setDataDone) {
-      this.setData();
-      this.setDataDone = true;
-    }
+    this.setData();
   },
   created() {
     this.setData();

@@ -25,8 +25,8 @@
 
 <script>
   import inputMixin from '../../mixins/inputMixin';
-  import store from './../../store/store'
-  import _ from 'lodash'
+  import store from './../../store/store';
+  import _ from 'lodash';
 
   export default {
     name: "InputSelectMultiple",

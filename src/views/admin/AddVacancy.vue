@@ -12,7 +12,7 @@
                @send="send()"
                :profile="dataTabs.tabs[3].disabled"
                :education="dataTabs.tabs[4].disabled"
-               :getData="getData"
+               v-if="getData"
     />
   </div>
 </template>
@@ -168,7 +168,7 @@
               this.VACANCY_ERROR(res.body.error);
             }
           });
-      }
+      },
     },
     created() {
       if (this.$route.meta.action === 'UPDATE') {

@@ -4,7 +4,7 @@
       <form @submit.prevent="changeStatus(item.id)"
             v-for="item in statuses"
       >
-        <button class="btn btn-primary mr-2">{{item.label}}</button>
+        <button class="btn btn-danger mr-2">{{item.label}}</button>
       </form>
     </div>
     <p v-if="success !== ''" class="text-success mt-2">{{success}}</p>
@@ -20,10 +20,6 @@
     data() {
       return {
         statuses: [
-          {
-            id: 0,
-            label: 'Отклик'
-          },
           {
             id: 1,
             label: 'Собеседование'
