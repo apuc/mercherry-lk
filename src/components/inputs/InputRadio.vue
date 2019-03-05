@@ -32,7 +32,16 @@
       }
     },
     created() {
-      this.checked = this.value;
+      if (isNaN(parseInt(this.value)) && this.value !== '') {
+        for (let i = 0; i < this.data.radio.length; i++) {
+          if (this.value === this.data.radio[i].label) {
+            this.checked = this.data.radio[i].value;
+          }
+        }
+      }
+      else {
+        this.checked = this.value;
+      }
       if (this.checked !== '') {
         this.updateValue({target: {value: this.checked}});
       }

@@ -37,7 +37,15 @@
     },
     methods: {
       setSelected() {
-        if (this.value !== '') {
+        if (isNaN(parseInt(this.value)) && this.value !== '') {
+          for (let i = 0; i < this.data.options.length; i++) {
+            if (this.value === this.data.options[i].label) {
+              this.selected = this.data.options[i].id;
+              this.updateValue({target: {value: this.data.options[i].id}});
+            }
+          }
+        }
+        else if (this.value !== '') {
           this.selected = this.value;
         }
         else if (this.data.options[0] !== undefined) {

@@ -4,7 +4,7 @@
       <form @submit.prevent="changeStatus(item.id)"
             v-for="item in statuses"
       >
-        <button class="btn btn-danger mr-2">{{item.label}}</button>
+        <button class="btn mr-2" :class="item.id === 50 ? 'btn-danger' : 'btn-info'">{{item.label}}</button>
       </form>
     </div>
     <p v-if="success !== ''" class="text-success mt-2">{{success}}</p>

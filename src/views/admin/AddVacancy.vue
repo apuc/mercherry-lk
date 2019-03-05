@@ -107,6 +107,7 @@
     methods: {
       ...mapActions({
         ADD_VACANCY: 'vacancy/ADD_VACANCY',
+        UPDATE_VACANCY: 'vacancy/UPDATE_VACANCY',
         VACANCY: 'vacancy/VACANCY'
       }),
       ...mapMutations({
@@ -175,6 +176,9 @@
         this.VACANCY({id: this.$route.params.id})
           .then(res => {
             this.ADD_DATA_VACANCY(res.body);
+            if (this.getAddVacancyData.hasOwnProperty('questions')) {
+              this.ADD_DATA_VACANCY({need_questions: 1});
+            }
             this.getData = true;
           });
       }

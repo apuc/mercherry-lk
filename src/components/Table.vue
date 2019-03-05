@@ -93,17 +93,12 @@
     },
     methods: {
       deleteElem(id) {
-        let deleted = false;
         store.dispatch(`${this.name}/DELETE_${this.name.toUpperCase()}`, {id: id})
           .then(res => {
             if (res.ok) {
-              deleted = true;
+              this.getElem();
             }
           });
-        if (deleted) {
-          this.getElem();
-          deleted = false;
-        }
       },
       getElem() {
         let dataSend = {page: this.currentPage};
