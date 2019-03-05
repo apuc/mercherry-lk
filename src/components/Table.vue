@@ -19,9 +19,9 @@
             <router-link class="table-name-link" v-if="nameLink && index == 1" :to="`/responses/${item.id}`">
               {{label}}
             </router-link>
-            <template v-else>
+            <span :class="{'admin-menu__count': key === 'response_count'}" v-else>
               {{label}}
-            </template>
+            </span>
           </td>
           <td>
             <div class="btn-icons justify-content-end">

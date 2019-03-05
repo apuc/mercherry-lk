@@ -111,7 +111,8 @@
       }),
       ...mapMutations({
         VACANCY_ERROR: 'vacancy/VACANCY_ERROR',
-        ADD_DATA_VACANCY: 'vacancy/ADD_DATA_VACANCY'
+        ADD_DATA_VACANCY: 'vacancy/ADD_DATA_VACANCY',
+        CLEAR_DATA_VACANCY: 'vacancy/CLEAR_DATA_VACANCY'
       }),
       onInputUpdate() {
         if (this.getAddVacancyData.need_questions == 1) {
@@ -180,6 +181,9 @@
       else {
         this.getData = true;
       }
+    },
+    beforeDestroy() {
+      this.CLEAR_DATA_VACANCY({});
     },
     mixins: [tabsMixin]
   }

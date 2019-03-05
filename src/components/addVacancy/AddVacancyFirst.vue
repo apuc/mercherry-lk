@@ -325,7 +325,7 @@
     },
     methods: {
       ...mapMutations({
-        ADD_DATA_VACANCY: 'vacancy/ADD_DATA_VACANCY'
+        ADD_DATA_VACANCY: 'vacancy/ADD_DATA_VACANCY',
       }),
       ...mapActions({
         PROJECT_LIST: 'project/PROJECT_LIST',

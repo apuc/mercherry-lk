@@ -14,7 +14,7 @@
       >
         <span>{{item.name}}</span>
         <span v-if="menuCount[item.name] !== undefined && menuCount[item.name] !== 0"
-              class="admin-menu__count"
+              class="admin-menu__count ml-auto"
         >
           {{menuCount[item.name]}}
         </span>
@@ -90,12 +90,11 @@
       left: 0;
     }
     &__count {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       min-width: 22px;
       height: 22px;
-      margin-left: auto;
       color: #fff;
       font-size: 12px;
       border-radius: 50%;
