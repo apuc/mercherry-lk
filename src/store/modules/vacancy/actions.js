@@ -57,8 +57,8 @@ export default {
       .catch(err => console.error(`catch, ${err}`));
   },
 
-  'VACANCY': async (context, id) => {
-    return await Vue.http.get(`${process.env.VUE_APP_API_URL}/jobs/${id}`)
+  'VACANCY': async (context, params) => {
+    return await Vue.http.get(`${process.env.VUE_APP_API_URL}/jobs/${params.id}`)
       .then(
         (res) => {
           return res;

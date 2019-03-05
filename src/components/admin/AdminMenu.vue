@@ -13,12 +13,19 @@
                    class="admin-menu__item"
       >
         <span>{{item.name}}</span>
+        <span v-if="menuCount[item.name] !== undefined && menuCount[item.name] !== 0"
+              class="admin-menu__count"
+        >
+          {{menuCount[item.name]}}
+        </span>
       </router-link>
     </nav>
   </div>
 </template>
 
 <script>
+  import {mapActions} from 'vuex';
+
   export default {
     name: "AdminMenu",
     data() {
@@ -30,14 +37,19 @@
           },
           {
             name: 'Вакансии',
-            href: 'vacancies'
+            href: 'vacancies',
           },
           {
             name: 'Список резюме',
             href: 'resume'
           }
         ],
-        menuOpen: false
+        menuOpen: false,
+      }
+    },
+    props: {
+      menuCount: {
+        type: Object
       }
     }
   }
@@ -76,6 +88,18 @@
     }
     &--open {
       left: 0;
+    }
+    &__count {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      height: 22px;
+      margin-left: auto;
+      color: #fff;
+      font-size: 12px;
+      border-radius: 50%;
+      background-color: #ff5e5e;;
     }
     &__btn {
       position: fixed;

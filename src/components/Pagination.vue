@@ -4,7 +4,7 @@
     <nav v-if="totalPages > 1">
       <ul class="pagination pagination-primary">
         <li class="page-item prev">
-          <router-link v-if="currentPage != 1" class="page-link" :to="`${path}/page/${prevPage}`">
+          <router-link v-if="currentPage != 1" class="page-link" :to="`${path}/page/${prevPage}`" @click.native="$emit('changePath')">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
           </router-link>
           <span v-else class="page-link disabled">
@@ -12,10 +12,10 @@
       </span>
         </li>
         <li class="page-item" :class="page == currentPage ? 'active' : ''" v-for="page in pages" :key="page">
-          <router-link class="page-link" :to="`${path}/page/${page}`">{{page}}</router-link>
+          <router-link class="page-link" :to="`${path}/page/${page}`" @click.native="$emit('changePath')">{{page}}</router-link>
         </li>
         <li>
-          <router-link v-if="currentPage != pages.length" class="page-link" :to="`${path}/page/${nextPage}`">
+          <router-link v-if="currentPage != pages.length" class="page-link" :to="`${path}/page/${nextPage}`" @click.native="$emit('changePath')">
             <i class="fa fa-angle-right" aria-hidden="true"></i>
           </router-link>
           <span v-else class="page-link disabled">

@@ -318,6 +318,9 @@
       }
     }
   }
+  .header .dropdown-toggle::after {
+    display: inline-block !important;
+  }
   .navbar-dark .navbar-nav .nav-link {
     color: #fff;
   }

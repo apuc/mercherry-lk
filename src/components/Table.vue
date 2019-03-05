@@ -12,7 +12,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="item in data">
+        <tr v-for="item in data"
+            :class="getClass(item.status)"
+        >
           <td v-for="(label, key, index) in item">
             <router-link class="table-name-link" v-if="nameLink && index == 1" :to="`/responses/${item.id}`">
               {{label}}
@@ -23,9 +25,9 @@
           </td>
           <td>
             <div class="btn-icons justify-content-end">
-              <button class="btn-ico">
+              <router-link class="btn-ico" :to="`/${name}/${item.id}`">
                 <i class="fa fa-eye"></i>
-              </button>
+              </router-link>
               <router-link v-if="editBtn" class="btn-ico" :to="`/${name}/update/${item.id}`">
                 <i class="fa fa-pencil"></i>
               </router-link>
@@ -43,6 +45,7 @@
                 :pages="pages"
                 :totalPages="totalPages"
                 :path="path"
+                @changePath="getPath()"
     />
   </div>
 </template>
@@ -117,7 +120,6 @@
               }
             }
             this.totalPages = res.body.totalPages;
-            this.currentPage = res.body.currentPage;
           });
       },
       getPath() {
@@ -129,12 +131,17 @@
           this.path = this.path.slice(0, this.path.indexOf('/page'));
         }
         this.getElem();
+      },
+      getClass(status) {
+        if (status === "Отклик") {
+          return 'table-success';
+        }
+        else if (status === "Отклонён") {
+          return 'table-danger';
+        }
       }
     },
     created() {
-      this.getPath();
-    },
-    beforeUpdate() {
       this.getPath();
     },
     mixins: [paginationMixin]
@@ -144,5 +151,11 @@
 <style>
   .table-name-link {
     color: inherit;
+  }
+  .table-success {
+    background-color: #d7f4d7;
+  }
+  .table-danger {
+    background-color: #ffd2d2;
   }
 </style>

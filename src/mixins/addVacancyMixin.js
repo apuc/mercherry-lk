@@ -1,7 +1,13 @@
 const addVacancyMixin = {
   data() {
     return {
-      value: {}
+      value: {},
+      setDataDone: false
+    }
+  },
+  props: {
+    getData: {
+      type: Boolean
     }
   },
   methods: {
@@ -46,12 +52,21 @@ const addVacancyMixin = {
     },
     onCountMinus(index) {
       this.inputs.splice(index, 1);
+    },
+    setData() {
+      for (let key in this.getAddVacancyData()) {
+        this.value[key] = this.getAddVacancyData()[key];
+      }
+    }
+  },
+  beforeUpdate() {
+    if (this.getData && !this.setDataDone) {
+      this.setData();
+      this.setDataDone = true;
     }
   },
   created() {
-    for (let key in this.getAddVacancyData()) {
-      this.value[key] = this.getAddVacancyData()[key];
-    }
+    this.setData();
   }
 };
 

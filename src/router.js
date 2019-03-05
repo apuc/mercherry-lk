@@ -8,7 +8,8 @@ import Password from "./views/Password";
 import AddProject from "./views/admin/AddProject";
 import AddVacancy from "./views/admin/AddVacancy";
 import Responses from "./views/admin/Responses";
-import Pagination from "./components/Pagination";
+import Vacancy from "./views/Vacancy";
+import ResponseView from "./views/admin/ResponseView";
 
 Vue.use(Router);
 
@@ -61,6 +62,12 @@ export default new Router({
       component: AddVacancy
     },
     {
+      path: '/vacancy/:id',
+      name: 'vacancy',
+      meta: {title: 'Просмотр вакансии: ', id: true},
+      component: Vacancy
+    },
+    {
       path: '/resume',
       name: 'resume',
       meta: {title: 'Список резюме'},
@@ -87,8 +94,14 @@ export default new Router({
     {
       path: '/responses/:id',
       name: 'responses',
-      meta: {title: 'Отклики'},
+      meta: {title: 'Отклики', isPublic: false},
       component: Responses
+    },
+    {
+      path: '/response/:id',
+      name: 'response',
+      meta: {title: 'Отклик', id: true},
+      component: ResponseView
     }
   ]
 })

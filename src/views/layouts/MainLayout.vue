@@ -3,7 +3,7 @@
     <Header :headerClass="'admin-header'"/>
     <main class="main">
       <div class="admin-wrap">
-        <AdminMenu/>
+        <AdminMenu :menuCount="menuCount"/>
         <div class="admin-content">
           <div class="card container p-0">
             <div class="card-body">
@@ -23,9 +23,35 @@
 <script>
   import Header from "../../components/Header";
   import AdminMenu from "../../components/admin/AdminMenu";
+  import {mapActions} from 'vuex';
+
   export default {
     name: "MainLayout",
     components: {AdminMenu, Header},
+    data() {
+      return {
+        menuCount: {
+          'Вакансии': 0
+        }
+      }
+    },
+    methods: {
+      ...mapActions({
+        RESPONSE_COUNT: 'response/RESPONSE_COUNT'
+      }),
+      responseCount() {
+        this.RESPONSE_COUNT()
+          .then(res => {
+            this.menuCount['Вакансии'] = res.body.count;
+          })
+      }
+    },
+    created() {
+      this.responseCount();
+    },
+    beforeUpdate() {
+      this.responseCount();
+    }
   }
 </script>
 
@@ -91,9 +117,6 @@
         border: none;
       }
     }
-  }
-
-  .table {
     &-id {
       width: 60px;
     }

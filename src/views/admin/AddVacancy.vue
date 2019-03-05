@@ -12,6 +12,7 @@
                @send="send()"
                :profile="dataTabs.tabs[3].disabled"
                :education="dataTabs.tabs[4].disabled"
+               :getData="getData"
     />
   </div>
 </template>
@@ -34,7 +35,7 @@
       AddVacancyFourth, AddVacancyThird, AddVacancySecond, AddVacancyFifth, Tabs, Breadcrumbs},
     data() {
       return {
-        getData: true,
+        getData: false,
         breadcrumbs: [
           {
             name: 'Главная',
@@ -170,10 +171,14 @@
     },
     created() {
       if (this.$route.meta.action === 'UPDATE') {
-        this.VACANCY(this.$route.params.id)
+        this.VACANCY({id: this.$route.params.id})
           .then(res => {
             this.ADD_DATA_VACANCY(res.body);
+            this.getData = true;
           });
+      }
+      else {
+        this.getData = true;
       }
     },
     mixins: [tabsMixin]
