@@ -9,24 +9,29 @@
     </div>
     <p v-if="success !== ''" class="text-success mt-2">{{success}}</p>
     <p v-if="error !== ''" class="text-danger mt-2">{{error}}</p>
+    <TableDetail :name="'response'"
+                 :dataNames="dataNames"
+                 class="mt-4"
+                 @addMissingValue="onAddMissingValue"
+                 :missingValue="missingValue"
+    />
   </div>
 </template>
 
 <script>
   import {mapActions} from 'vuex';
+  import TableDetail from "../../components/TableDetail";
+  import tableDetailMixin from '../../mixins/tableDetailMixin';
 
   export default {
     name: "ResponseView",
+    components: {TableDetail},
     data() {
       return {
         statuses: [
           {
             id: 1,
             label: 'Собеседование'
-          },
-          {
-            id: 2,
-            label: 'Обучение'
           },
           {
             id: 3,
@@ -38,7 +43,19 @@
           }
         ],
         success: '',
-        error: ''
+        error: '',
+        dataNames: {
+          id: 'ID',
+          job: 'Название вакансии',
+          user: 'Имя пользователя',
+          status: 'Статус',
+          created: 'Дата отклика',
+        },
+        missingValue: {
+          training: '',
+          id: ''
+        },
+        hasTraining: false
       }
     },
     methods: {
@@ -59,8 +76,15 @@
               this.success = '';
             }
           });
+      },
+      changedValue() {
+        if(this.missingValue.training === 1 && !this.hasTraining) {
+          this.statuses.splice(1, 0, {id: 2, label: 'Обучение'});
+          this.hasTraining = true;
+        }
       }
-    }
+    },
+    mixins: [tableDetailMixin]
   }
 </script>
 

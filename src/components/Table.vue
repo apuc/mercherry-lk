@@ -19,7 +19,7 @@
             <router-link class="table-name-link" v-if="nameLink && index == 1" :to="`/responses/${item.id}`">
               {{label}}
             </router-link>
-            <span :class="{'admin-menu__count': key === 'response_count'}" v-else>
+            <span :class="{'admin-menu__count': key === 'response_count' && label !== 0}" v-else>
               {{label}}
             </span>
           </td>
@@ -54,6 +54,7 @@
   import store from '../store/store';
   import Pagination from "./Pagination";
   import paginationMixin from '../mixins/paginationMixin';
+  import timeMixin from '../mixins/timeMixin';
 
   export default {
     name: "Table",
@@ -109,10 +110,7 @@
           .then(res => {
             this.data = res.body.result;
             for (let value of this.data) {
-              if (value.hasOwnProperty('created')) {
-                let date = new Date(value.created * 1000)
-                value.created = date.toLocaleDateString();
-              }
+              this.parseTime(value);
             }
             this.totalPages = res.body.totalPages;
           });
@@ -139,7 +137,7 @@
     created() {
       this.getPath();
     },
-    mixins: [paginationMixin]
+    mixins: [paginationMixin, timeMixin]
   }
 </script>
 

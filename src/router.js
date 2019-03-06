@@ -8,8 +8,9 @@ import Password from "./views/Password";
 import AddProject from "./views/admin/AddProject";
 import AddVacancy from "./views/admin/AddVacancy";
 import Responses from "./views/admin/Responses";
-import Vacancy from "./views/Vacancy";
+import Vacancy from "./views/admin/Vacancy";
 import ResponseView from "./views/admin/ResponseView";
+import ProjectView from "./views/admin/ProjectView";
 
 Vue.use(Router);
 
@@ -38,6 +39,12 @@ export default new Router({
       ]
     },
     {
+      path: '/project/add',
+      name: 'add-project',
+      meta: {title: 'Добавить проект', action: 'ADD'},
+      component: AddProject
+    },
+    {
       path: '/vacancies',
       name: 'vacancies',
       meta: {title: 'Вакансии'},
@@ -48,6 +55,18 @@ export default new Router({
           meta: {title: 'Вакансии'}
         }
       ]
+    },
+    {
+      path: '/project/:id',
+      name: 'project',
+      meta: {title: 'Просмотр проекта: ', id: true},
+      component: ProjectView
+    },
+    {
+      path: '/project/update/:id',
+      name: 'update-project',
+      meta: {title: 'Редактирование проекта: ', action: 'UPDATE', id: true},
+      component: AddProject
     },
     {
       path: '/vacancy/add',
@@ -86,16 +105,16 @@ export default new Router({
       component: Password
     },
     {
-      path: '/project/add',
-      name: 'add-project',
-      meta: {title: 'Добавить проект'},
-      component: AddProject
-    },
-    {
       path: '/responses/:id',
       name: 'responses',
       meta: {title: 'Отклики', isPublic: false},
-      component: Responses
+      component: Responses,
+      children: [
+        {
+          path: 'page/:page',
+          meta: {title: 'Отклики'}
+        }
+      ]
     },
     {
       path: '/response/:id',

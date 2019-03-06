@@ -37,19 +37,18 @@
       setTimeout(() => {
         let contextVue = this;
         $(document).ready(function() {
-          if ($(".fileuploader").length) {
-            $(".fileuploader").each(function(index, value) {
-              $(value).uploadFile({
-                autoSubmit: false,
-                fileName: "myfile",
-                onSelect:function(files)
-                {
-                  this.value = files[0];
-                  contextVue.$emit("input", files[0]);
-                }
-              });
-            });
-          }
+          $(`#${contextVue.data.id}`).uploadFile({
+            autoSubmit: false,
+            fileName: "myfile",
+            onSelect:function(files)
+            {
+              this.value = files[0];
+              let formData = new FormData();
+              formData.append('file', files[0]);
+              this.value = formData;
+              contextVue.$emit("input", this.value);
+            }
+          });
         });
       }, 100)
     }

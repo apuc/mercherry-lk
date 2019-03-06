@@ -11,6 +11,7 @@
                        :key="input.data.name"
                        :data="input.data"
                        v-model="value[input.data.name]"
+                       :name="input.data.name"
                        @input="onInput"
             >
             </component>
@@ -27,6 +28,7 @@
                        :key="input.data.name"
                        :data="input.data"
                        v-model="value[input.data.name]"
+                       :name="input.data.name"
                        @input="onInput"
             >
             </component>

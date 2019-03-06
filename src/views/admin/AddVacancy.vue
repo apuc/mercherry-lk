@@ -81,22 +81,6 @@
             }
           ]
         },
-        tabDisabled: {
-          profile: {
-            value: 1,
-            item: 3
-          },
-          several: {
-            interview_training: {
-              value: 1,
-              item: 4
-            },
-            internship_training: {
-              value: 1,
-              item: 4
-            }
-          }
-        },
       }
     },
     computed: {

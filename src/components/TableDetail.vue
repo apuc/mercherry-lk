@@ -4,8 +4,10 @@
       <table class="table">
         <tbody>
           <tr v-for="(item, index) in data">
-            <td>{{dataNames[index]}}</td>
-            <td>{{item}}</td>
+            <td class="table-detail-first">{{dataNames[index]}}</td>
+            <td>
+              {{item}}
+            </td>
           </tr>
         </tbody>
       </table>
@@ -15,12 +17,14 @@
 
 <script>
   import store from '../store/store';
+  import timeMixin from '../mixins/timeMixin';
 
   export default {
     name: "TableDetail",
     data() {
       return {
-        data: {}
+        data: {},
+        addData: {}
       }
     },
     props: {
@@ -31,6 +35,9 @@
       dataNames: {
         type: Object,
         required: true
+      },
+      missingValue: {
+        type: Object
       }
     },
     methods: {
@@ -39,15 +46,28 @@
         store.dispatch(`${this.name}/${this.name.toUpperCase()}`, dataSend)
           .then(res => {
             this.data = res.body;
+            this.parseTime(this.data);
+            this.deleteValue();
           });
+      },
+      deleteValue() {
+        for (let i in this.missingValue) {
+          if (this.data.hasOwnProperty(i)) {
+            this.$emit('addMissingValue', i, this.data[i]);
+            delete this.data[i];
+          }
+        }
       }
     },
     created() {
       this.getData();
-    }
+    },
+    mixins: [timeMixin]
   }
 </script>
 
 <style scoped>
-
+  .table-detail-first {
+    width: 250px;
+  }
 </style>

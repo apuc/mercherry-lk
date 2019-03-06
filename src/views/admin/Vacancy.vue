@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import TableDetail from "../components/TableDetail";
+  import TableDetail from "../../components/TableDetail";
   export default {
     name: "Vacancy",
     components: {TableDetail},

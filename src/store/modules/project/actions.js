@@ -16,7 +16,7 @@ export default {
   },
 
   'UPDATE_PROJECT': async (context, params) => {
-    return await Vue.http.post(`${process.env.VUE_APP_API_URL}/projects/create/${params.id}`, params.data)
+    return await Vue.http.post(`${process.env.VUE_APP_API_URL}/projects/update/${params.id}`, params.data)
       .then(
         (res) => {
           return res;

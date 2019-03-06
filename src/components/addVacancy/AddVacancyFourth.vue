@@ -17,7 +17,7 @@
         <button type="button" class="btn btn-secondary" @click="$emit('prev')">Предыдущий шаг</button>
         <button type="button" class="btn btn-secondary" :class="{disabled: !canSave}" @click="$emit('next')">Следующий шаг</button>
       </div>
-      <button v-if="!canSave" class="btn btn-success ml-3" @click.prevent="$emit('send')">Сохранить</button>
+      <button v-if="!canSave" class="btn btn-success ml-3 mb-2" @click.prevent="$emit('send')">Сохранить</button>
     </div>
   </div>
 </template>

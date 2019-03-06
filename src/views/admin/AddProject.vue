@@ -98,12 +98,24 @@
     },
     methods: {
       ...mapActions({
-        ADD_PROJECT: 'project/ADD_PROJECT'
+        ADD_PROJECT: 'project/ADD_PROJECT',
+        UPDATE_PROJECT: 'project/UPDATE_PROJECT',
+        PROJECT: 'project/PROJECT'
       }),
       validateBeforeSubmit() {
         this.$validator.validateAll().then((result) => {
           if (result) {
-            this.ADD_PROJECT(this.value)
+            let dataSend = {};
+            if (this.$route.meta.action === 'UPDATE') {
+              dataSend = {
+                id: this.$route.params.id,
+                data: this.value
+              }
+            }
+            else {
+              dataSend = this.value;
+            }
+            this[`${this.$route.meta.action}_PROJECT`](dataSend)
               .then(res => {
                 if (res.ok) {
                   this.$router.push({name: 'projects'});
@@ -112,7 +124,18 @@
           }
         });
       },
+      getData() {
+        this.PROJECT({id: this.$route.params.id})
+          .then(res => {
+            this.value = res.body;
+          })
+      }
     },
+    created() {
+      if (this.$route.meta.action === 'UPDATE') {
+        this.getData();
+      }
+    }
   }
 </script>
 
