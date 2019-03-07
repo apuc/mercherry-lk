@@ -66,7 +66,6 @@
   .admin-menu {
     display: flex;
     flex-direction: column;
-    margin-left: 5px;
     &-wrap {
       z-index: 101;
       display: flex;
@@ -124,6 +123,7 @@
       position: relative;
       display: flex;
       align-items: center;
+      margin-top: 10px;
       padding: 0.75rem 1.25rem 0.75rem 1.25rem;
       color: #000000;
       font-size: 0.875rem;

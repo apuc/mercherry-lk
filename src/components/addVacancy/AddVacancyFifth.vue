@@ -1,48 +1,47 @@
 <template>
   <div>
-    <form>
-      <template v-if="this.interview_training == 1">
-        <div class="form-group">
-          <label class="mb-4">Обучение перед собеседованием</label>
-          <div class="row">
-            <component v-for="input in interview_training_data"
-                       :is="input.component"
-                       :class="input.className"
-                       :key="input.data.name"
-                       :data="input.data"
-                       v-model="value[input.data.name]"
-                       :name="input.data.name"
-                       @input="onInput"
-            >
-            </component>
+    <div class="tab-content">
+      <form>
+        <template v-if="this.interview_training == 1">
+          <div class="form-group">
+            <label class="mb-4">Обучение перед собеседованием</label>
+            <div class="row">
+              <component v-for="input in interview_training_data"
+                         :is="input.component"
+                         :class="input.className"
+                         :key="input.data.name"
+                         :data="input.data"
+                         v-model="value[input.data.name]"
+                         :name="input.data.name"
+                         @input="onInput"
+              >
+              </component>
+            </div>
           </div>
-        </div>
-      </template>
-      <template v-if="this.internship_training == 1">
-        <div class="form-group">
-          <label class="mb-4">Обучение перед стажировкой</label>
-          <div class="row">
-            <component v-for="input in internship_training_data"
-                       :is="input.component"
-                       :class="input.className"
-                       :key="input.data.name"
-                       :data="input.data"
-                       v-model="value[input.data.name]"
-                       :name="input.data.name"
-                       @input="onInput"
-            >
-            </component>
+        </template>
+        <template v-if="this.internship_training == 1">
+          <div class="form-group">
+            <label class="mb-4">Обучение перед стажировкой</label>
+            <div class="row">
+              <component v-for="input in internship_training_data"
+                         :is="input.component"
+                         :class="input.className"
+                         :key="input.data.name"
+                         :data="input.data"
+                         v-model="value[input.data.name]"
+                         :name="input.data.name"
+                         @input="onInput"
+              >
+              </component>
+            </div>
           </div>
-        </div>
-      </template>
-    </form>
-    <div class="row">
+        </template>
+      </form>
+    </div>
+    <div class="row mb-4">
       <div class="col-12 d-flex flex-wrap justify-content-end mt-4">
-        <div class="btn-group flex-wrap ml-auto mb-2">
-          <button type="button" class="btn btn-secondary" @click="$emit('prev')">Предыдущий шаг</button>
-          <button type="button" class="btn btn-secondary disabled">Следующий шаг</button>
-        </div>
-        <button class="btn btn-success ml-3 mb-2" @click.prevent="$emit('send')">Сохранить</button>
+        <button type="button" class="btn btn-primary mb-2" @click="$emit('prev')">Предыдущий шаг</button>
+        <button class="btn btn-primary ml-3 mb-2" @click.prevent="$emit('send')">Сохранить</button>
       </div>
     </div>
   </div>

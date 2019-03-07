@@ -107,7 +107,7 @@ export default new Router({
     {
       path: '/responses/:id',
       name: 'responses',
-      meta: {title: 'Отклики', isPublic: false},
+      meta: {title: 'Отклики', isPublic: true},
       component: Responses,
       children: [
         {
@@ -119,7 +119,7 @@ export default new Router({
     {
       path: '/response/:id',
       name: 'response',
-      meta: {title: 'Отклик', id: true},
+      meta: {title: 'Отклик', id: true, isPublic: true},
       component: ResponseView
     }
   ]

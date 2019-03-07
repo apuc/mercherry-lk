@@ -59,7 +59,7 @@
       padding: 1em 1em;
       border-radius: 5px;
       font-size: 0.875rem;
-      font-weight: 600;
+      font-weight: 500;
       text-align: center;
       color: #434a54;
       background: #e6e9ed;
@@ -81,5 +81,10 @@
   .nav-tabs a.nav-link:hover, .nav-tabs a.nav-link:focus,
   .nav-tabs button.nav-link:hover, .nav-tabs button.nav-link:focus{
     border-color: #e9ecef #e9ecef #dee2e6;
+  }
+  .tab-content {
+    padding: 2.5%;
+    border-radius: 5px;
+    border: 1px solid #f3f3f3;
   }
 </style>

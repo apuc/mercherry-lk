@@ -1,28 +1,32 @@
 <template>
   <form>
-    <div class="row">
-      <component
-          v-for="(input, index) in inputs"
-          :is="input.component"
-          :class="input.className"
-          :key="input.data.name"
-          :data="input.data"
-          v-validate="input.rules"
-          @input="onInput"
-          :name="input.data.name"
-          v-model="value[input.data.name]"
-          :error="errors.first(input.data.name)"
-          @countPlus="onCountPlus"
-          @countMinus="onCountMinus"
-          :index="index"
-      >
-      </component>
+    <div class="tab-content">
+      <div class="row">
+        <component
+            v-for="(input, index) in inputs"
+            :is="input.component"
+            :class="input.className"
+            :key="input.data.name"
+            :data="input.data"
+            v-validate="input.rules"
+            @input="onInput"
+            :name="input.data.name"
+            v-model="value[input.data.name]"
+            :error="errors.first(input.data.name)"
+            @countPlus="onCountPlus"
+            @countMinus="onCountMinus"
+            :index="index"
+        >
+        </component>
+      </div>
+    </div>
+    <div class="row mt-4">
       <div class="col-12 d-flex flex-wrap justify-content-end">
-        <div class="btn-group flex-wrap ml-auto mb-2">
-          <button type="button" class="btn btn-secondary" @click="$emit('prev')">Предыдущий шаг</button>
-          <button type="button" class="btn btn-secondary" :class="{disabled: !canSave}" @click="validateBeforeSubmit">Следующий шаг</button>
+        <div class="d-flex flex-wrap justify-content-end ml-auto">
+          <button type="button" class="btn btn-primary mb-2" @click="$emit('prev')">Предыдущий шаг</button>
+          <button v-if="canSave" type="button" class="btn btn-primary ml-3 mb-2" @click="$emit('next')">Следующий шаг</button>
+          <button v-else class="btn btn-primary ml-3 mb-2" @click.prevent="$emit('send')">Сохранить</button>
         </div>
-        <button v-if="!canSave" class="btn btn-success ml-3 mb-2" @click.prevent="$emit('send')">Сохранить</button>
       </div>
     </div>
   </form>

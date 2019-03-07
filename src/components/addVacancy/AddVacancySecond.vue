@@ -1,27 +1,28 @@
 <template>
   <form>
-    <div class="row">
-      <component
-          v-for="(input, index) in inputs"
-          :is="input.component"
-          :class="input.className"
-          :key="input.data.name"
-          :data="input.data"
-          v-validate="input.rules"
-          @input="onInput"
-          :name="input.data.name"
-          v-model="value[input.data.name]"
-          :error="errors.first(input.data.name)"
-          @countPlus="onCountPlus"
-          :index="index"
-      >
-      </component>
-
-      <div class="col-12 d-flex">
-        <div class="btn-group flex-wrap ml-auto mb-2">
-          <button type="button" class="btn btn-secondary" @click="$emit('prev')">Предыдущий шаг</button>
-          <button type="button" class="btn btn-secondary" @click="validateBeforeSubmit">Следующий шаг</button>
-        </div>
+    <div class="tab-content">
+      <div class="row">
+        <component
+            v-for="(input, index) in inputs"
+            :is="input.component"
+            :class="input.className"
+            :key="input.data.name"
+            :data="input.data"
+            v-validate="input.rules"
+            @input="onInput"
+            :name="input.data.name"
+            v-model="value[input.data.name]"
+            :error="errors.first(input.data.name)"
+            @countPlus="onCountPlus"
+            :index="index"
+        >
+        </component>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12 d-flex flex-wrap justify-content-end mt-4">
+        <button type="button" class="btn btn-primary mb-2" @click="$emit('prev')">Предыдущий шаг</button>
+        <button type="button" class="btn btn-primary ml-3 mb-2" @click="validateBeforeSubmit">Следующий шаг</button>
       </div>
     </div>
     <ModalAddNetwork/>

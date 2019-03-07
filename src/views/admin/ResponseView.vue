@@ -53,7 +53,6 @@
         },
         missingValue: {
           training: '',
-          id: ''
         },
         hasTraining: false
       }

@@ -59,7 +59,7 @@ router.beforeEach((to, from, next) => {
     next();
   }
   else {
-    if (to.path === '/login' || to.path === '/password-reset') {
+    if (to.path === '/login' || to.path === '/password-reset' || to.meta.isPublic) {
       next();
     }
     else {

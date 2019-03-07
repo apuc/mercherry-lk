@@ -1,23 +1,23 @@
 <template>
   <div>
-    <form>
-      <div class="form-group d-flex">
-        <input class="form-control" type="text" v-model="newQuestion">
-        <button type="button" class="btn btn-success ml-3" @click="addQuestion">Добавить</button>
+    <div class="tab-content">
+      <form>
+        <div class="form-group d-flex">
+          <input class="form-control" type="text" v-model="newQuestion">
+          <button type="button" class="btn btn-success ml-3" @click="addQuestion">Добавить</button>
+        </div>
+      </form>
+      <div v-for="(item, index) in questions"
+           class="question"
+      >
+        <span>{{item}}</span>
+        <button class="btn-close" @click="deleteQuestion(index)"><i class="fa fa-close"></i></button>
       </div>
-    </form>
-    <div v-for="(item, index) in questions"
-         class="question"
-    >
-      <span>{{item}}</span>
-      <button class="btn-close" @click="deleteQuestion(index)"><i class="fa fa-close"></i></button>
     </div>
     <div class="d-flex flex-wrap justify-content-end mt-4">
-      <div class="btn-group flex-wrap ml-auto mb-2">
-        <button type="button" class="btn btn-secondary" @click="$emit('prev')">Предыдущий шаг</button>
-        <button type="button" class="btn btn-secondary" :class="{disabled: !canSave}" @click="$emit('next')">Следующий шаг</button>
-      </div>
-      <button v-if="!canSave" class="btn btn-success ml-3 mb-2" @click.prevent="$emit('send')">Сохранить</button>
+        <button type="button" class="btn btn-primary mb-2" @click="$emit('prev')">Предыдущий шаг</button>
+        <button v-if="canSave" type="button" class="btn btn-primary ml-3 mb-2" @click="$emit('next')">Следующий шаг</button>
+        <button v-else class="btn btn-primary ml-3 mb-2" @click.prevent="$emit('send')">Сохранить</button>
     </div>
   </div>
 </template>

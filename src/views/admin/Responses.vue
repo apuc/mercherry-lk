@@ -13,7 +13,6 @@
         <button type="button" class="btn btn-success ml-3" @click.prevent="validateBeforeSubmit">Добавить</button>
       </div>
       <p v-if="error !== ''" class="text-danger mt-2">{{error}}</p>
-      <p v-if="success !== ''" class="text-success mt-2">{{success}}</p>
     </form>
     <Table :head="head"
            :name="name"
@@ -21,6 +20,7 @@
            :idName="idName"
            :editBtn="editBtn"
            :deleteBtn="deleteBtn"
+           v-if="auth || access"
     />
   </div>
 </template>
@@ -29,6 +29,7 @@
   import Table from "../../components/Table";
   import InputText from "../../components/inputs/InputText";
   import {mapActions} from 'vuex';
+  import store from '../../store/store';
 
   export default {
     name: "Responses",
@@ -47,8 +48,9 @@
         editBtn: false,
         deleteBtn: false,
         email: '',
-        success: '',
-        error: ''
+        error: '',
+        auth: false,
+        access: false
       }
     },
     methods: {
@@ -61,17 +63,24 @@
             this.RESPONSE_EMAIL({email: this.email, job_id: this.$route.params.id})
               .then(res => {
                 if (res.ok) {
-                  this.success = 'Отправлено!';
                   this.error = '';
+                  store.commit('response/SET_SUCCESS', true);
+                  this.access = store.getters['response/getAccess'];
+                  console.log(res)
                 }
                 else {
                   this.error = res.body.error.job_id;
-                  this.success = '';
+                  store.commit('response/SET_SUCCESS', false);
+                  this.access = store.getters['response/getAccess'];
                 }
               });
           }
         });
       }
+    },
+    created() {
+      this.access = store.getters['response/getAccess'];
+      this.auth = store.getters['profile/auth'];
     }
   }
 </script>

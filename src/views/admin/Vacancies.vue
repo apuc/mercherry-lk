@@ -1,9 +1,7 @@
 <template>
   <div>
-    <router-link to="/vacancy/add" class="btn btn-sm btn-primary mb-2">
-      <i class="fa fa-circle-o mr-1">
-        <i class="fa fa-plus"></i>
-      </i>
+    <router-link to="/vacancy/add" class="btn btn-primary mb-2">
+      <img width="15" class="mr-1" src="/img/plus-sign-in-circle.svg" alt="">
       <span>Добавить вакансию</span>
     </router-link>
     <Table :head="head"
