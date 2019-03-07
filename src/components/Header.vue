@@ -114,6 +114,22 @@
       right: 0;
     }
   }
+  .dropdown-menu {
+    left: unset;
+    right: 0;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
+    border: 0 solid transparent;
+    border-radius: 0.25rem;
+  }
+  .dropdown-item {
+    padding: 0.625rem 1.25rem;
+    color: #999;
+    &:hover {
+      color: #080808;
+      text-decoration: none;
+      background-color: #f5f5f5;
+    }
+  }
   .burger {
     display: inline-block;
     position: relative;

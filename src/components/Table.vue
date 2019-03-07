@@ -141,7 +141,66 @@
   }
 </script>
 
-<style>
+<style lang="scss">
+  .table {
+    margin-bottom: 0;
+    @media (max-width: 991px) {
+      min-width: 800px;
+    }
+    &-wrap {
+      width: 100%;
+      @media (max-width: 991px) {
+        overflow-x: scroll;
+        overflow-y: hidden;
+      }
+    }
+    thead {
+      th {
+        border-top: 0;
+        border-bottom-width: 1px;
+        font-weight: 500;
+        font-size: 1rem;
+        i {
+          margin-left: 0.325rem;
+        }
+      }
+    }
+    th,
+    td {
+      padding: 0.8375rem 0.6rem;
+      line-height: 1;
+      border-color: #f3f3f3 !important;
+    }
+    td {
+      font-size: 0.875rem;
+      img {
+        width: 36px;
+        height: 36px;
+        border-radius: 100%;
+      }
+      .badge {
+        margin-bottom: 0;
+      }
+    }
+    &.table-borderless {
+      border: none;
+      tr,
+      td,
+      th {
+        border: none;
+      }
+    }
+    &-id {
+      width: 60px;
+    }
+    &-btn-group {
+      width: 160px;
+    }
+  }
+
+  .table-buttons {
+    width: 115px;
+  }
   .table-name-link {
     color: inherit;
   }

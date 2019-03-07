@@ -20,7 +20,7 @@
            :idName="idName"
            :editBtn="editBtn"
            :deleteBtn="deleteBtn"
-           v-if="auth || access"
+           v-if="auth || hash !== ''"
     />
   </div>
 </template>
@@ -29,6 +29,7 @@
   import Table from "../../components/Table";
   import InputText from "../../components/inputs/InputText";
   import {mapActions} from 'vuex';
+  import hashMixin from '../../mixins/hashMixin';
   import store from '../../store/store';
 
   export default {
@@ -49,8 +50,7 @@
         deleteBtn: false,
         email: '',
         error: '',
-        auth: false,
-        access: false
+        auth: false
       }
     },
     methods: {
@@ -64,14 +64,14 @@
               .then(res => {
                 if (res.ok) {
                   this.error = '';
-                  store.commit('response/SET_SUCCESS', true);
-                  this.access = store.getters['response/getAccess'];
+                  localStorage.setItem('hash', '');
+                  this.checkHash();
                   console.log(res)
                 }
                 else {
                   this.error = res.body.error.job_id;
-                  store.commit('response/SET_SUCCESS', false);
-                  this.access = store.getters['response/getAccess'];
+                  localStorage.removeItem('hash');
+                  this.checkHash();
                 }
               });
           }
@@ -79,9 +79,10 @@
       }
     },
     created() {
-      this.access = store.getters['response/getAccess'];
       this.auth = store.getters['profile/auth'];
-    }
+      this.checkHash();
+    },
+    mixins: [hashMixin]
   }
 </script>
 

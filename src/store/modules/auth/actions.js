@@ -6,6 +6,7 @@ export default {
       .then(
         (res) => {
           localStorage.setItem('token', res.body.token);
+          localStorage.removeItem('hash');
           return res;
         },
         (err) => {

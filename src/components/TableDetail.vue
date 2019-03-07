@@ -6,7 +6,15 @@
           <tr v-for="(item, index) in data">
             <td class="table-detail-first">{{dataNames[index]}}</td>
             <td>
-              {{item}}
+              <template v-if="Array.isArray(item)">
+                <template v-for="text in item">
+                  {{text}}
+                  <br>
+                </template>
+              </template>
+              <template v-else>
+                {{item}}
+              </template>
             </td>
           </tr>
         </tbody>
@@ -47,6 +55,7 @@
           .then(res => {
             this.data = res.body;
             this.parseTime(this.data);
+            this.parseData();
             this.deleteValue();
           });
       },
@@ -55,6 +64,16 @@
           if (this.data.hasOwnProperty(i)) {
             this.$emit('addMissingValue', i, this.data[i]);
             delete this.data[i];
+          }
+        }
+      },
+      parseData() {
+        for (let i in this.data) {
+          if (this.data[i] === false) {
+            this.data[i] = 'Нет';
+          }
+          else if (this.data[i] === true) {
+            this.data[i] = 'Да';
           }
         }
       }
