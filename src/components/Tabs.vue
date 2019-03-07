@@ -6,14 +6,14 @@
     >
       <button v-if="item.done"
               class="nav-link"
-              :class="{active: item.name === dataTabs.currentTab, disabled: item.disabled, 'nav-link-success': item.done}"
+              :class="{active: item.name === dataTabs.currentTab, 'd-none': item.disabled, 'nav-link-success': item.done}"
               @click="tabClick(item.name)"
       >
         {{item.label}}
       </button>
       <span v-else
             class="nav-link"
-            :class="{active: item.name === dataTabs.currentTab, disabled: item.disabled, 'nav-link-success': item.done}"
+            :class="{active: item.name === dataTabs.currentTab, 'd-none': item.disabled, 'nav-link-success': item.done}"
       >
          {{item.label}}
       </span>

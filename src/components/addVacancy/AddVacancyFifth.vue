@@ -38,10 +38,10 @@
         </template>
       </form>
     </div>
-    <div class="row mt-4 px-2">
-      <div class="col-12 d-flex flex-wrap justify-content-end">
+    <div class="row mt-4">
+      <div class="pagination col-12 d-flex flex-wrap justify-content-end">
         <button type="button" class="btn btn-primary mb-2" @click="$emit('prev')">Предыдущий шаг</button>
-        <button class="btn btn-primary ml-3 mb-2" @click.prevent="$emit('send')">Сохранить</button>
+        <button class="btn btn-primary mb-2" @click.prevent="$emit('send')">Сохранить</button>
       </div>
     </div>
   </div>

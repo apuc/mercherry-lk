@@ -20,11 +20,11 @@
         </component>
       </div>
     </div>
-    <div class="row mt-4 px-2">
-      <div class="col-12 d-flex flex-wrap justify-content-end ml-auto">
+    <div class="row mt-4">
+      <div class="pagination col-12 d-flex flex-wrap justify-content-end ml-auto">
         <button type="button" class="btn btn-primary mb-2" @click="$emit('prev')">Предыдущий шаг</button>
-        <button v-if="canSave" type="button" class="btn btn-primary ml-3 mb-2" @click="$emit('next')">Следующий шаг</button>
-        <button v-else class="btn btn-primary ml-3 mb-2" @click.prevent="$emit('send')">Сохранить</button>
+        <button v-if="canSave" type="button" class="btn btn-primary mb-2" @click="$emit('next')">Следующий шаг</button>
+        <button v-else class="btn btn-primary mb-2" @click.prevent="$emit('send')">Сохранить</button>
       </div>
     </div>
   </form>

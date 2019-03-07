@@ -60,6 +60,8 @@
   }
 </script>
 
-<style scoped>
-
+<style>
+  .pagination .btn {
+    margin: 0 0.5em;
+  }
 </style>
