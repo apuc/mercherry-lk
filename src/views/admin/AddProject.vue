@@ -18,7 +18,7 @@
         >
         </component>
       </div>
-      <button class="btn btn-success" @click.prevent="validateBeforeSubmit">Сохранить</button>
+      <button class="btn btn-primary" @click.prevent="validateBeforeSubmit">Сохранить</button>
     </form>
   </div>
 </template>

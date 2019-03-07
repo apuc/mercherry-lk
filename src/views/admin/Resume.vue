@@ -188,7 +188,7 @@
         </div>
         <div class="col-12 mb-4">
           <button class="btn btn-primary mr-1">Поиск</button>
-          <button class="btn btn-success mr-1">Экспорт</button>
+          <button class="btn btn-primary mr-1">Экспорт</button>
           <button class="btn btn-link">Сброс</button>
         </div>
       </div>

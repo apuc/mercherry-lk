@@ -10,7 +10,7 @@
                v-model="email"
                :class="{'is-invalid': errors.first('email') !== undefined}"
         >
-        <button type="button" class="btn btn-success ml-3" @click.prevent="validateBeforeSubmit">Добавить</button>
+        <button type="button" class="btn btn-primary ml-3" @click.prevent="validateBeforeSubmit">Добавить</button>
       </div>
       <p v-if="error !== ''" class="text-danger mt-2">{{error}}</p>
     </form>

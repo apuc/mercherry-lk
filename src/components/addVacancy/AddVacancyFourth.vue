@@ -4,7 +4,7 @@
       <form>
         <div class="form-group d-flex">
           <input class="form-control" type="text" v-model="newQuestion">
-          <button type="button" class="btn btn-success ml-3" @click="addQuestion">Добавить</button>
+          <button type="button" class="btn btn-primary ml-3" @click="addQuestion">Добавить</button>
         </div>
       </form>
       <div v-for="(item, index) in questions"

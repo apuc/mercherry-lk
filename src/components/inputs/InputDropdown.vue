@@ -16,7 +16,7 @@
         >
         </v-select>
 
-        <button v-if="data.modal !== undefined" type="button" class="btn btn-success ml-3" :data-target="data.modal" data-toggle="modal">+</button>
+        <button v-if="data.modal !== undefined" type="button" class="btn btn-primary ml-3" :data-target="data.modal" data-toggle="modal">+</button>
       </div>
       <p v-if="error !== undefined" class="text-danger">{{error}}</p>
     </div>

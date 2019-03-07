@@ -14,7 +14,7 @@
             />
           </div>
           <div class="modal-footer pt-0">
-            <button class="btn btn-success" @click.prevent="validateBeforeSubmit">Сохранить</button>
+            <button class="btn btn-primary" @click.prevent="validateBeforeSubmit">Сохранить</button>
           </div>
         </form>
       </div>
