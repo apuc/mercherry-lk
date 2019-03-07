@@ -14,7 +14,7 @@
         <button class="btn-close" @click="deleteQuestion(index)"><i class="fa fa-close"></i></button>
       </div>
     </div>
-    <div class="d-flex flex-wrap justify-content-end mt-4">
+    <div class="d-flex flex-wrap justify-content-end mt-4 px-2">
         <button type="button" class="btn btn-primary mb-2" @click="$emit('prev')">Предыдущий шаг</button>
         <button v-if="canSave" type="button" class="btn btn-primary ml-3 mb-2" @click="$emit('next')">Следующий шаг</button>
         <button v-else class="btn btn-primary ml-3 mb-2" @click.prevent="$emit('send')">Сохранить</button>

@@ -45,10 +45,9 @@
 
 <style lang="scss">
   .nav-tabs {
-    margin-left: -0.5rem;
-    margin-right: -0.5rem;
     border-bottom: none;
     .nav-item {
+      line-height: 1.8;
       @media(max-width: 992px) {
         width: unset !important;
       }
@@ -83,6 +82,7 @@
     border-color: #e9ecef #e9ecef #dee2e6;
   }
   .tab-content {
+    margin: 0.5em;
     padding: 2.5%;
     border-radius: 5px;
     border: 1px solid #f3f3f3;

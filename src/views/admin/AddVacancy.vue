@@ -5,7 +5,6 @@
           @tabClick="onTabClick"
     />
     <component :is="`AddVacancy${dataTabs.currentTab}`"
-               class="mt-2"
                @onInput="onInputUpdate"
                @next="next()"
                @prev="prev()"

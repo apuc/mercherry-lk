@@ -19,8 +19,8 @@
         </component>
       </div>
     </div>
-    <div class="row mt-4">
-      <div class="col-12 d-flex flex-wrap justify-content-end mt-4">
+    <div class="row mt-4 px-2">
+      <div class="col-12 d-flex flex-wrap justify-content-end">
         <button type="button" class="btn btn-primary mb-2" @click="$emit('prev')">Предыдущий шаг</button>
         <button type="button" class="btn btn-primary ml-3 mb-2" @click="validateBeforeSubmit">Следующий шаг</button>
       </div>
