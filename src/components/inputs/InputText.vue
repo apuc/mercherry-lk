@@ -11,7 +11,7 @@
              :value="value"
              :placeholder="data.placeholder || data.label"
       >
-      <p v-if="error !== undefined" class="text-danger">{{error}}</p>
+      <p v-if="error !== undefined" class="text-danger mt-1">{{error}}</p>
     </div>
   </div>
 </template>

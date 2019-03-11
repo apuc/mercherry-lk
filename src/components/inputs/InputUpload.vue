@@ -9,7 +9,7 @@
       >
         Upload
       </div>
-      <p v-if="getVacancyError.hasOwnProperty(data.name)" class="text-danger">{{getVacancyError[data.name]}}</p>
+      <p v-if="getVacancyError.hasOwnProperty(data.name)" class="text-danger mt-1">{{getVacancyError[data.name]}}</p>
     </div>
   </div>
 </template>
